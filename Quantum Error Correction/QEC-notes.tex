@@ -503,6 +503,83 @@ bound on the existence of quantum codes (As of today, there are no known codes w
 
 \section{Constructing quantum codes}
 
+\subsection{Carlderbank-Shor-Steane codes}
+CSS codes are an important subclass of the more general class of \emph{stabilizer} codes. 
+\begin{definition}
+  Let $C_1$ and $C_2$ be $[n, k_1]$ and $[n, k_2]$ classical linear codes over $\mathbb{F_2}$ such that $C_2 \subset C_1$ and $C_1$ and $C_2^\perp$ both correct 
+  $t$ errors. We define the \emph{CSS code of $C_1$ over $C_2$ $\operatorname{CSS}(C_1, C_2)$} to be an $[n, k_1 - k_2]$ quantum code capable of correcting errors on $t$ qubits via the following construction: \\
+  Let $x \in C_1$ be an arbitrary codeword in $C_1$, we define the quantum state $\ket{x + C_2}$ to be 
+  $$\ket{x + C_2} := \frac{1}{\sqrt{|C_2|}} \sum_{y \in C_2} \ket{x + y}$$
+  Let $x' \in C_1$ such that $x - x' \in C_2$, then clearly $\ket{x + C_2} = \ket{x' + C_2}$, therefore the state $\ket{x + C_2}$ depends only upon the coser $C_1 / C_2$ which $x$ is in. 
+  Moreover, if $x$ and $x'$ belong to different cosets of $C_2$, then for no $y, y' \in C_2$ does $x + y = x' + y'$, and therefore $\ket{x + C_2}$ and $\ket{x' + C_2}$ are orthonormal states. 
+  
+  The quantum code $\operatorname{CSS}(C_1, C_2)$ is defined to be vector space spanned by the states $\ket{x + C_2}$ for all $x \in C_1$. 
+  The dimension of $\operatorname{CSS}(C_1, C_2)$ is $|C_1|/|C_2| = 2^{k_1 - k_2}$, and therefore $\operatorname{CSS}(C_1, C_2)$ is an 
+  $[n, k_1 - k_2]$ quantum code.
+
+  We can exploit the classical error-correcting properties of $C_1$ and $C_2^\perp$ to detect and correct quantum errors. 
+  In fact it is possible to correct and detect up to $t$ bit and phase flip errors on $\operatorname{CSS}(C_1, C_2)$ by making use 
+  of the properties of $C_1 $and $C_2^\perp$ respectively. 
+\end{definition}
+
+\paragraph{Correcting bit-flips}
+Suppose the bit flip errors are described by an $n$ bit vector $e_1$ with $1$
+where the bit flips occured, and the phase flip errors are described by an $n$ bit vector $e_2$ with $1$s where phase flips occured. 
+If $\ket{x + C_2}$ was the original state then the corrupted state is 
+$$\frac{1}{\sqrt{|C_2|}} \sum_{y \in C_2} (-1)^{(x + y) \cdot e_2} \ket{x + y + e_1}$$
+To detect bit flips, it is convenient to introduce an ancilla containing sufficient qubits to store the syndrome for $C_1$, and initially the 
+$\ket{0}$ state. We use reversible computation (CNOTS) to apply the parity matrix $H_1$ of $C_1$ taking 
+$$\ket{x + y + e_1} \ket{0} \to \ket{x + y + 1} \ket{H_1 (x + y + e_1)} = \ket{x + y + e} \ket{H_1 e_1}$$
+Therefore the effect of this operation is to produce the state: 
+$$\frac{1}{\sqrt{|C_2|}} \sum_{y \in C_2} (-1)^{(x+y) \cdot e_2} \ket{x + y + e_1} \ket{H_1 e_1}$$
+Error-detection for the bit flip errors is completed by measuring the anscilla to obtain $H_1 e_1$ and discarding the ancilla, giving the state 
+$$\frac{1}{\sqrt{|C_2|}} \sum_{y \in C_2} (-1)^{(x+y) \cdot e_2} \ket{x + y + e_1}$$
+Knowing $H_1 e_1$ we can infer $e_1$ since $C_1$ can correct up to $t$ errors, which completes the error-detection. Recovery is performed by 
+applying NOT gates to the qubits at whichever positions in $e_1$ a bit flip occured, removing all the bit flip errors and giving the state
+$$\frac{1}{\sqrt{|C_2|}} \sum_{y \in C_2} (-1)^{(x+y) \cdot e_2} \ket{x + y}$$
+
+\paragraph{Correcting phase-flips}
+To detect phase flip errors, we apply Hadamard gates to each qubit, taking the state to 
+$$\frac{1}{\sqrt{|C_2| 2^n}} \sum_z \sum_{y \in C_2} (-1)^{(x+y) \cdot (e_2 + z)} \ket{z}$$
+where the sum is over all possible values for $n$ bit $z$. Setting $z' = z + e_2$ we get 
+$$\frac{1}{\sqrt{|C_2| 2^n}} \sum_{z'}\sum_{y \in C_2} (-1)^{(x+y) \cdot z'} \ket{z' + e_2}$$
+But if $z' \in C_2^\perp$, then $\sum_{y \in C_2} (-1)^{y \cdot z'} = |C_2|$, and if $z' \not\in C_2^\perp$ then 
+$\sum_{y \in C_2} (-1)^{y \cdot z'} = 0$ which gives us 
+$$\frac{1}{\sqrt{2^n / |C_2|}} \sum_{z' \in C_2^\perp} (-1)^{x \cdot z'} \ket{z' + e_2}$$
+Which is just a bit flip error described by the vector $e_2$. Therefore we can just error-detect as above, by introducing 
+an ancilla and reversibly applying the parity check matrix $H_2$ for $C_2^\perp$ to obtain $H_2 e_2$, and correct $e_2$ obtaining the state
+$$\frac{1}{\sqrt{2^n / |C_2|}} \sum_{z' \in C_2^\perp} (-1)^{x \cdot z'} \ket{z'}$$
+The error correction is completed by again applying Hadamard gates to each qubits, obtaining 
+$$\frac{1}{\sqrt{|C_2|}} \sum_{y \in C_2} \ket{x + y}$$
+which is the original encoded state $\ket{x + C_2}$!
+
+\subsection*{Quantum Gilbert-Varshamov bound} 
+One important application of CSS codes is the proof of the \emph{quantum Gilbert–Varshamov bound}.  Fix any \(\delta\in(0,1)\) and set 
+\[
+t = \frac{\delta n}{2}\,.
+\]
+Then in the asymptotic regime \(n\to\infty\) there exist \([n,k]\) CSS codes correcting up to \(t\) qubit-errors whose rate satisfies
+\[
+\frac{k}{n}
+\;\ge\;
+1 \;-\; 2\,H(\delta)
+\;-\;
+O\!\Bigl(\tfrac{\log n}{n}\Bigr),
+\]
+or equivalently
+\[
+\frac{k}{n}
+=
+1 \;-\; 2\,H\!\Bigl(\tfrac{2t}{n}\Bigr)
+\;-\;
+o(1).
+\]
+Here 
+\[
+H(x) \;=\; -\,x\log_{2}x \;-\;(1-x)\log_{2}(1-x)
+\] 
+And Thus, good quantum error-correcting codes exist, provided we don't pack too many qubits $k$ into an $n$ qubit code. 
+
 \section{References}
 The material is adapted from: 
 \begin{quote}
