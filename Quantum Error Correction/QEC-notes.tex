@@ -347,7 +347,7 @@ The code is a combination of the three qubit phase flip and bit flip codes:
 $$\ket{0} \to \ket{+++}, \, \ket{1} \to \ket{---}$$
 
 \item Next, we encode each of these qubits using the three qubit bit flip code: 
-$$\ket{+} \to \sqrt{2} \left(\ket{000} + \ket{111}\right), \, \ket{-} \to \left(\ket{000} - \ket{111}\right)$$
+$$\ket{+} \to \left(\ket{000} + \ket{111}\right) / \sqrt{2}, \, \ket{-} \to \left(\ket{000} - \ket{111}\right) / \sqrt{2}$$
 \end{itemize}
 The result is a nince qubit code with codewords given by: 
 \begin{align*}
@@ -553,7 +553,13 @@ The error correction is completed by again applying Hadamard gates to each qubit
 $$\frac{1}{\sqrt{|C_2|}} \sum_{y \in C_2} \ket{x + y}$$
 which is the original encoded state $\ket{x + C_2}$!
 
-\subsection*{Quantum Gilbert-Varshamov bound} 
+\paragraph{Summary} 
+Let $C_1$ and $C_2$ be $[n, k_1]$ and $[n, k_2]$ classical linear codes such that $C_2 \subset C_1$, and both $C_1$ and $C_2^\perp$ can correct errors on up to $t$ bits. 
+Then $\operatorname{CSS}(C_1, C_2)$ is a $[n, k_1 - k_2]$ quantum error-correcting code which can correct arbitrary errors on $t$ qubits. 
+Furthermore, the error-detection and correction steps require only the application of Hadamard and CNOT gates, in each case a number linear in the size of the code. Encoding and decoding can also be performed in a linear number 
+of gates in the code. 
+
+\subsection{Quantum Gilbert-Varshamov bound} 
 One important application of CSS codes is the proof of the \emph{quantum Gilbert–Varshamov bound}.  Fix any \(\delta\in(0,1)\) and set 
 \[
 t = \frac{\delta n}{2}\,.
@@ -580,17 +586,14 @@ H(x) \;=\; -\,x\log_{2}x \;-\;(1-x)\log_{2}(1-x)
 \] 
 And Thus, good quantum error-correcting codes exist, provided we don't pack too many qubits $k$ into an $n$ qubit code. 
 
-\paragraph{Summary} 
-Let $C_1$ and $C_2$ be $[n, k_1]$ and $[n, k_2]$ classical linear codes such that $C_2 \subset C_1$, and both $C_1$ and $C_2^\perp$ can correct errors on up to $t$ bits. 
-Then $\operatorname{CSS}(C_1, C_2)$ is a $[n, k_1 - k_2]$ quantum error-correcting code which can correct arbitrary errors on $t$ qubits. 
-Furthermore, the error-detection and correction steps require only the application of Hadamard and CNOT gates, in each case a number linear in the size of the code. Encoding and decoding can also be performed in a linear number 
-of gates in the code. 
 
 \paragraph{Notation} 
 The codes defined by 
 $$\ket{x + C_2} := \frac{1}{\sqrt{|C_2|}} \sum_{y \in C_2} (-1)^{u \cdot y} \ket{x + y + v}$$
 and parametrized by $u, v \in \mathbb{F}_2^n$ are \emph{equivalent} to $\operatorname{CSS}(C_1, C_2)$. 
 We denote these code by $\operatorname{CSS}_{u, v}(C_1, C_2)$. 
+
+
 \section{References}
 The material is adapted from: 
 \begin{quote}
