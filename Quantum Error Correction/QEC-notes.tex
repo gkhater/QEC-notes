@@ -559,6 +559,60 @@ Then $\operatorname{CSS}(C_1, C_2)$ is a $[n, k_1 - k_2]$ quantum error-correcti
 Furthermore, the error-detection and correction steps require only the application of Hadamard and CNOT gates, in each case a number linear in the size of the code. Encoding and decoding can also be performed in a linear number 
 of gates in the code. 
 
+\paragraph{Notation} 
+The codes defined by 
+$$\ket{x + C_2} := \frac{1}{\sqrt{|C_2|}} \sum_{y \in C_2} (-1)^{u \cdot y} \ket{x + y + v}$$
+and parametrized by $u, v \in \mathbb{F}_2^n$ are \emph{equivalent} to $\operatorname{CSS}(C_1, C_2)$. 
+We denote these code by $\operatorname{CSS}_{u, v}(C_1, C_2)$. 
+
+\paragraph{The Steane code} This is an important example of a CSS code that may be constructed using the $[7, 4,3]$ Hamming code which has parity check matrix:
+\[
+H[C_1] = \begin{pmatrix}
+1 & 0 & 1 & 0 & 1 & 0 & 1 \\
+0 & 1 & 1 & 0 & 0 & 1 & 1 \\
+0 & 0 & 0 & 1 & 1 & 1 & 1
+\end{pmatrix}
+\]
+Suppose we lavel this code $C_1$ and $C_2 = C_1^\perp$. To use these to define a CSSC code, we need to check that $C_2 \subset C_1$. 
+But the parity check matrix of $C_2$ is the transpose of the generator matrix of $C_1$: 
+\[
+H[C_2] = G[C_1]^T =
+\begin{pmatrix}
+1 & 0 & 0 & 0 & 1 & 1 & 1\\
+0 & 1 & 0 & 0 & 1 & 0 & 1\\
+0 & 0 & 1 & 0 & 1 & 1 & 0\\
+0 & 0 & 0 & 1 & 1 & 1 & 1
+\end{pmatrix}
+\]
+Comparing the two, we see that the span of the rows of $H[C_2]$ contains the span of the rows of $H[C_1]$, 
+and since the codes are the kernels of these parity check matrices, $C_2 \subset C_1$. Moreover $C_2^\perp = C_1$, so $C_1$ and $C_2^\perp$ 
+are both distance $3$ codes which can correct errors on $1$ bit. 
+Furthermore, since $C_1$ is a $[7, 4]$ code and $C_2$ is a $[7,3]$ code it follows that $\operatorname{CSS}(C_1, C_2)$ is a $[7,1]$ quantum code 
+which can correct errors on a single qubit. 
+
+\begin{definition}
+    We define this $[7,1]$ quantum code to be the \emph{Steane code}.
+\end{definition}
+
+This code has nice properties that make it easy to work with, notice that 
+\begin{align}
+    \ket{0_L} &= \ket{0 + C_2} \\
+    &= \frac{1}{\sqrt{8}} \big[
+        \ket{0000000} + \ket{1010101} + \ket{0110011} + 
+        \ket{1100110} + \\
+        &\quad \ket{0001111} + \ket{1011010} + 
+        \ket{0111100} + \ket{1101001}
+    \big] 
+\end{align}
+To determine $\ket{1_L}$ we need to find an element of $C_1$ that is not in $C_2$, such as $\ket{1111111}$ giving: 
+\begin{align}
+    \ket{1_l} &= \frac{1}{\sqrt{8}} \big[ 
+        \ket{1111111} + \ket{0101010} + \ket{1001100} + 
+        \ket{0011001} \\
+        &\quad + \ket{1110000} + \ket{0100101} + \ket{1000011} + \ket{0010110} 
+    \big]
+\end{align}
+
 \subsection{Quantum Gilbert-Varshamov bound} 
 One important application of CSS codes is the proof of the \emph{quantum Gilbert–Varshamov bound}.  Fix any \(\delta\in(0,1)\) and set 
 \[
@@ -585,13 +639,6 @@ Here
 H(x) \;=\; -\,x\log_{2}x \;-\;(1-x)\log_{2}(1-x)
 \] 
 And Thus, good quantum error-correcting codes exist, provided we don't pack too many qubits $k$ into an $n$ qubit code. 
-
-
-\paragraph{Notation} 
-The codes defined by 
-$$\ket{x + C_2} := \frac{1}{\sqrt{|C_2|}} \sum_{y \in C_2} (-1)^{u \cdot y} \ket{x + y + v}$$
-and parametrized by $u, v \in \mathbb{F}_2^n$ are \emph{equivalent} to $\operatorname{CSS}(C_1, C_2)$. 
-We denote these code by $\operatorname{CSS}_{u, v}(C_1, C_2)$. 
 
 
 \section{References}
