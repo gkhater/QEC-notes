@@ -13,9 +13,9 @@
 
 %----- PAGE LAYOUT -----
 \usepackage{geometry}
-  \geometry{top=1in, bottom=1in, left=1in, right=1in}
+\geometry{top=1in, bottom=1in, left=1in, right=1in}
 \usepackage{setspace}
-  \onehalfspacing  % 1.5 line spacing
+\onehalfspacing  % 1.5 line spacing
 
 %----- FANCY HEADERS & FOOTERS -----
 \usepackage{fancyhdr}
@@ -60,23 +60,23 @@
 %----- OTHER PACKAGES -----
 \usepackage{graphicx}
 \usepackage{tikz}
-    \usetikzlibrary{calc, matrix, decorations.pathreplacing, positioning}
+\usetikzlibrary{calc, matrix, decorations.pathreplacing, positioning}
 \usepackage{hyperref}
-  \hypersetup{colorlinks,
-    linkcolor=blue, citecolor=purple, urlcolor=teal}
+\hypersetup{colorlinks,
+linkcolor=blue, citecolor=purple, urlcolor=teal}
 \usepackage{enumitem}
-  \setlist[itemize]{nosep, left=1.5em}
+\setlist[itemize]{nosep, left=1.5em}
 \usepackage{booktabs}
 \usepackage{listings}
-  \lstset{
-    basicstyle=\ttfamily\small,
-    numbers=left,
-    numbersep=5pt,
-    frame=single,
-    breaklines=true
-  }
+\lstset{
+basicstyle=\ttfamily\small,
+numbers=left,
+numbersep=5pt,
+frame=single,
+breaklines=true
+}
 \usepackage{xcolor}
-  \definecolor{shade}{HTML}{F5F5F5}
+\definecolor{shade}{HTML}{F5F5F5}
 \usepackage{float}
 %----- CUSTOM MACROS -----
 \newcommand{\F}{\mathbb{F}}
@@ -113,16 +113,16 @@ classical Error-correction (and their respective prerequisites).
 \subsection{Fidelity}
 
 \begin{definition}\label{def:fidelity}
-  We define the \emph{fidelity} of states $\rho$ and $\sigma$ to ne 
-  $$F(\rho, \sigma) \equiv \operatorname{tr} \sqrt{\rho^{1/2} \sigma \rho^{1/2}}$$
-  While it is a measure of distance between two sotaotes, it is not a metric on quantum states (but gives rise to a useful one). 
+We define the \emph{fidelity} of states $\rho$ and $\sigma$ to ne 
+$$F(\rho, \sigma) \equiv \operatorname{tr} \sqrt{\rho^{1/2} \sigma \rho^{1/2}}$$
+While it is a measure of distance between two sotaotes, it is not a metric on quantum states (but gives rise to a useful one). 
 \end{definition}
 
 There are two important special cases where it is possible to give more explicit formulae for the fidelity. The first is when $\rho$ and $\sigma$ commute, that is, are diagonal in the same basis 
 $$\rho = \sum_{i} r_i \ket{i} \bra{i}; \; \sigma = \sum_i s_i \ket{i} \bra{i}$$
 for some orthonormal basis $\ket{i}$. In this case: 
 \begin{align*}
-  F(\rho, \sigma) &= \sum_i \sqrt{r_i s_i}
+F(\rho, \sigma) &= \sum_i \sqrt{r_i s_i}
 \end{align*}
 i.e when $\rho$ and $\sigma$ commute, the quantum fidelity reduces to the classical fidelity $F(r_i, s_i)$ between the eigenvalue distributions $r_i$ and $s_i$ of 
 $\rho$ and $\sigma$ (how much the distributions overlap).
@@ -133,32 +133,32 @@ $$F(\ket{\psi}, \rho) = \sqrt{\braket{\psi | \rho | \psi}}$$
 i.e Fiedlity is the square root of the overlap between $\ket{psi}$ and $\rho$.
 
 \begin{proposition}
-  The fidelity is invariant under unitary transformations: 
-  $$F(U \rho U^\dagger, U \sigma U^\dagger) = F(\rho, \sigma)$$
+The fidelity is invariant under unitary transformations: 
+$$F(U \rho U^\dagger, U \sigma U^\dagger) = F(\rho, \sigma)$$
 \end{proposition}
 
 \begin{theorem}[Uhlmann's Theorem] \label{thm:fidelity-purification}
-  Suppose $\rho$ and $\sigma$ are states of a quantum system $Q$. Introduce a second quantum system $R$ 
-  which is a copy of $Q$. Then 
-  $$F(\rho, \sigma) - \max_{\ket{\psi}, \ket{\varphi}} |\braket{\psi | \varphi}|$$
+Suppose $\rho$ and $\sigma$ are states of a quantum system $Q$. Introduce a second quantum system $R$ 
+which is a copy of $Q$. Then 
+$$F(\rho, \sigma) - \max_{\ket{\psi}, \ket{\varphi}} |\braket{\psi | \varphi}|$$
 \end{theorem}
 
 \begin{corollary}
-  Although this theorem is not necessarily useful for computing fidelity, it allows us to observe that: 
-  \begin{enumerate}
-    \item Fidelity is symmetric in its inputs: 
-    $$F(\sigma, \rho) = F(\rho, \sigma)$$
+Although this theorem is not necessarily useful for computing fidelity, it allows us to observe that: 
+\begin{enumerate}
+\item Fidelity is symmetric in its inputs: 
+$$F(\sigma, \rho) = F(\rho, \sigma)$$
 
-    \item The fidelity is bounded between $0$ and $1$: 
-    $$0 \leq F(\rho, \sigma) \leq 1$$
+\item The fidelity is bounded between $0$ and $1$: 
+$$0 \leq F(\rho, \sigma) \leq 1$$
 
-    \item The fidelity between a state and itself is $1$: 
-    $$F(\rho, \rho) = 1$$
-    Similarly, if $\rho \neq \sigma$ we get 
-    $$F(\rho, \sigma) < 1$$
+\item The fidelity between a state and itself is $1$: 
+$$F(\rho, \rho) = 1$$
+Similarly, if $\rho \neq \sigma$ we get 
+$$F(\rho, \sigma) < 1$$
 
-    \item $F(\rho, \sigma) = 0$ iff $\rho$ and $\sigma$ have support on orthogonal subspaces (intuitively its because they are perfectly distinguishable).  
-  \end{enumerate}
+\item $F(\rho, \sigma) = 0$ iff $\rho$ and $\sigma$ have support on orthogonal subspaces (intuitively its because they are perfectly distinguishable).  
+\end{enumerate}
 \end{corollary}
 
 In analogy to the classical case, we can show that 
@@ -171,73 +171,73 @@ The basic idea is that the \emph{angle} between two points on the sphere is a me
 fidelity between to states is the maximum inner product between purifications of those states. 
 
 \begin{definition}
-  We define the \emph{angle} between states $\rho$ and $\sigma$ by 
-  $$A(\rho, \sigma) = \arccos F(\rho, \sigma)$$
-  This suggests in some sense that $F(\rho, \sigma)$ is the cosine of the angle between the states 
-  (This is justified from the discussion above). 
+We define the \emph{angle} between states $\rho$ and $\sigma$ by 
+$$A(\rho, \sigma) = \arccos F(\rho, \sigma)$$
+This suggests in some sense that $F(\rho, \sigma)$ is the cosine of the angle between the states 
+(This is justified from the discussion above). 
 \end{definition}
 
 \begin{proposition}
-  The angle defined above is a metric on the statespace. 
+The angle defined above is a metric on the statespace. 
 \end{proposition}
 
 \begin{theorem}[Monotonicity of the fidelity]\label{thm:Monotonicity-fidelity}
-  Suppose that $\mathcal{E}$ is a trace-preserving quantum operation. Let $\rho$ and $\sigma$ be density opreators. Then 
-  $$F(\mathcal{\rho}, \mathcal{\sigma}) \geq F(\rho, \sigma)$$
+Suppose that $\mathcal{E}$ is a trace-preserving quantum operation. Let $\rho$ and $\sigma$ be density opreators. Then 
+$$F(\mathcal{\rho}, \mathcal{\sigma}) \geq F(\rho, \sigma)$$
 \end{theorem}
 
 \begin{corollary}[Contractivity of the angle]\label{thm:contractivity-angle}
-  Since $\arccos$ is monotonically decreasing on $[0,1]$, 
-  $$A(\mathcal{E}(\rho), \mathcal{E}(\sigma)) \leq A(\rho, \sigma)$$
+Since $\arccos$ is monotonically decreasing on $[0,1]$, 
+$$A(\mathcal{E}(\rho), \mathcal{E}(\sigma)) \leq A(\rho, \sigma)$$
 \end{corollary}
 
 \begin{theorem}[Strong concavity of the fidelity]\label{thm:strong-concavity-fidelity}
-  Let $p_i$ and $q_i$ be probability distribution over the same index set, and $\rho_i$ and $\sigma_i$ density operators also indexed by the same index set. Then 
-  $$F \left(\sum_i p_i \rho_i, \sum_i q_i \sigma_i\right) \geq \sum_i \sqrt{p_i q_i} F(\rho_i, \sigma_i)$$
+Let $p_i$ and $q_i$ be probability distribution over the same index set, and $\rho_i$ and $\sigma_i$ density operators also indexed by the same index set. Then 
+$$F \left(\sum_i p_i \rho_i, \sum_i q_i \sigma_i\right) \geq \sum_i \sqrt{p_i q_i} F(\rho_i, \sigma_i)$$
 \end{theorem}
 
 \begin{corollary}[Joint concavity of fidelity] \label{thm:joint-concavity-fidelity}
-  The fidelity is \emph{jointly concave}
-  $$F\left(\sum_i p_i \rho_i, \sum_i p_i \sigma_i\right) \geq \sum_i p_i F(\rho_i, \sigma_i)$$
+The fidelity is \emph{jointly concave}
+$$F\left(\sum_i p_i \rho_i, \sum_i p_i \sigma_i\right) \geq \sum_i p_i F(\rho_i, \sigma_i)$$
 \end{corollary}
 
 \begin{corollary}[Concavity of fidelity] \label{thm:concavity-fidelity}
-  The fidelity is concave: 
-  $$F\left(\sum_i p_i \rho_i, \sigma\right) \geq \sum_i p_i F(\rho_i, \sigma)$$
-  By symmetry, it is also concave in the second entry.
+The fidelity is concave: 
+$$F\left(\sum_i p_i \rho_i, \sigma\right) \geq \sum_i p_i F(\rho_i, \sigma)$$
+By symmetry, it is also concave in the second entry.
 \end{corollary}
 \section{Introduction to QEC}
 There are some important differences between classical error information and quantum information. 
 This forces us to develop new ideas and techniques to make quantum error-correction possible. In particular: 
 \begin{enumerate}
-  \item \emph{No cloning theorem:} Becaues we can't copy quantum states, even the simplest repetiton code are not easily implemented. 
-  Even if we could copy quantum states, we couldn't measure and copy the three quantum states output from the channel. 
+\item \emph{No cloning theorem:} Becaues we can't copy quantum states, even the simplest repetiton code are not easily implemented. 
+Even if we could copy quantum states, we couldn't measure and copy the three quantum states output from the channel. 
 
-  \item \emph{Errors are continuous:} A continuum of erros might occur \emph{on a single qubit}. It may appear that error correction / detection 
-  would require infinite precision. 
+\item \emph{Errors are continuous:} A continuum of erros might occur \emph{on a single qubit}. It may appear that error correction / detection 
+would require infinite precision. 
 
-  \item \emph{Measurment destroys quantum information:} In classical-error correction, we observe the output from the channel, which allows us to 
-  decide which decoding procedure to apply. This is not feasible in quantum mechanics. 
+\item \emph{Measurment destroys quantum information:} In classical-error correction, we observe the output from the channel, which allows us to 
+decide which decoding procedure to apply. This is not feasible in quantum mechanics. 
 \end{enumerate}
 Fortunately, non of these problems are fatal, as we will see in the rest of the notes. 
 
 \subsection{The three qubit bit flip code}
 
 \begin{definition}
-  The \emph{bit flip channel} is a channel which leaves the qubits untouched with probability $1 - p$, and flips the qubits with probability $p$. 
- i.e With probability $p$ the state $\ket{\psi}$ is taken to the state $X \ket{\psi}$, where $X$ is the Pauli $\sigma_x$ operator, or \emph{bit flip operator}. 
+The \emph{bit flip channel} is a channel which leaves the qubits untouched with probability $1 - p$, and flips the qubits with probability $p$. 
+i.e With probability $p$ the state $\ket{\psi}$ is taken to the state $X \ket{\psi}$, where $X$ is the Pauli $\sigma_x$ operator, or \emph{bit flip operator}. 
 \end{definition}
 
 \begin{definition}
-  The \emph{bit flip code} is a quantum error-correcting coe that may be used to protect the qubits against the effects of the bit flip channel. It is defined as follows. 
+The \emph{bit flip code} is a quantum error-correcting coe that may be used to protect the qubits against the effects of the bit flip channel. It is defined as follows. 
 
-  Suppose we encode the single qubit state $a \ket{0} + b \ket{1}$ in three qubits as $a \ket{000} + b \ket{111}$. We denote: 
-  \begin{align*}
-    \ket{0} \to \ket{0_L} \equiv \ket{000} \\
-    \ket{1} \to \ket{1_L} \equiv \ket{111}
-  \end{align*}
-  The notation $\ket{0_L}$ and $\ket{1_l}$ indicate that these are the \emph{logical} states. 
-  This encoding can be represented by a quantum circuit (as seen on page 428).
+Suppose we encode the single qubit state $a \ket{0} + b \ket{1}$ in three qubits as $a \ket{000} + b \ket{111}$. We denote: 
+\begin{align*}
+\ket{0} \to \ket{0_L} \equiv \ket{000} \\
+\ket{1} \to \ket{1_L} \equiv \ket{111}
+\end{align*}
+The notation $\ket{0_L}$ and $\ket{1_l}$ indicate that these are the \emph{logical} states. 
+This encoding can be represented by a quantum circuit (as seen on page 428).
 \end{definition}
 
 Suppose the initial state $a \ket{0} + b \ket{1}$ has been perfectly encoded as $a \ket{000} + b \ket{111}$. 
@@ -245,28 +245,28 @@ Each of the three qubits is passed through an independant copy of the bit flip c
 two stage \emph{error-correction} procedure which can be used to recover the quantum state. 
 
 \begin{enumerate}
-  \item \emph{Error-detection} or \emph{syndrome diagnosis:} We perform a measurement which tells us what error, if any, occured on the quantum state. 
-  We call this measurment the \emph{error syndrome}. For the bit flip channel there are four error syndromes, corresponding to the four projection operators. 
-  \center 
-  \begin{table}[h]
-  \centering
-  \begin{tabular}{c|c|l}
-  \hline
-    $j$ & $P_j$ & Description \\
-    \hline
-    $P_0$ & $\ket{000}\bra{000} + \ket{111}\bra{111}$ & no error \\
-    $P_1$ & $\ket{100}\bra{100} + \ket{011}\bra{011}$ & bit flip on qubit 1 \\
-    $P_2$ & $\ket{010}\bra{010} + \ket{101}\bra{101}$ & bit flip on qubit 2 \\
-    $P_3$ & $\ket{001}\bra{001} + \ket{110}\bra{110}$ & bit flip on qubit 3 \\
-  \hline
-  \end{tabular}
-  \end{table}
+\item \emph{Error-detection} or \emph{syndrome diagnosis:} We perform a measurement which tells us what error, if any, occured on the quantum state. 
+We call this measurment the \emph{error syndrome}. For the bit flip channel there are four error syndromes, corresponding to the four projection operators. 
+\center 
+\begin{table}[h]
+\centering
+\begin{tabular}{c|c|l}
+\hline
+$j$ & $P_j$ & Description \\
+\hline
+$P_0$ & $\ket{000}\bra{000} + \ket{111}\bra{111}$ & no error \\
+$P_1$ & $\ket{100}\bra{100} + \ket{011}\bra{011}$ & bit flip on qubit 1 \\
+$P_2$ & $\ket{010}\bra{010} + \ket{101}\bra{101}$ & bit flip on qubit 2 \\
+$P_3$ & $\ket{001}\bra{001} + \ket{110}\bra{110}$ & bit flip on qubit 3 \\
+\hline
+\end{tabular}
+\end{table}
 
-  
-  \item \emph{Recovery:} We use the value of the error syndrome to tell us what procedure to use 
-  to recover the initial state. 
-  For example, if the error syndrome was $1$, indicating a bit flip on the first qubit, then we flip that qubit again, recovering the initial state with perfect accuracy. We do the same for 
-  all other error syndromes. 
+
+\item \emph{Recovery:} We use the value of the error syndrome to tell us what procedure to use 
+to recover the initial state. 
+For example, if the error syndrome was $1$, indicating a bit flip on the first qubit, then we flip that qubit again, recovering the initial state with perfect accuracy. We do the same for 
+all other error syndromes. 
 \end{enumerate}
 
 \paragraph{Error analysis}
@@ -280,16 +280,16 @@ $$ F(\ket{\psi}, \rho) = \sqrt{\braket{\psi | \rho | \psi}}$$
 The goal of quantum error-correction is to increase the fidelity with which quantum information is stored (or communicated) near the maximum fidelity of one. 
 We will compare the \emph{minimum} fidelity achieved by the three qubit flip code with the fidelity when no error correction is performed. 
 \begin{itemize}
-  \item Suppose the quantum state of interest is $\ket{\psi}$. Without using the error correcting code, the state of the qubit after being sent through the channel is
-    $$ \rho = (1-p) \ket{\psi} \bra{\psi} + p X \ket{\psi} \bra{\psi} X$$ 
-    The fidelity becomes 
-    $$F = \sqrt{\braket{\psi | \rho | \psi}} = \sqrt{(1-p) + p \braket{\psi | X | \psi}^2}$$
-    Which is minimized when $\ket{\psi} = \ket{0}$ therefore at $F = \sqrt{1 - p}$. 
+\item Suppose the quantum state of interest is $\ket{\psi}$. Without using the error correcting code, the state of the qubit after being sent through the channel is
+$$ \rho = (1-p) \ket{\psi} \bra{\psi} + p X \ket{\psi} \bra{\psi} X$$ 
+The fidelity becomes 
+$$F = \sqrt{\braket{\psi | \rho | \psi}} = \sqrt{(1-p) + p \braket{\psi | X | \psi}^2}$$
+Which is minimized when $\ket{\psi} = \ket{0}$ therefore at $F = \sqrt{1 - p}$. 
 
-  \item Now suppose that three qubit error-correcting code is used to protect the state $\ket{\psi} = a \ket{0_L} + b \ket{1_L}$. The quantum state after noise and error correction is 
-  $$\rho = [(1-p)^3 + 3p(1-p)^2] \ket{\psi} \bra{\psi} + \hat{\varepsilon}$$
-  Where $\hat{\varepsilon} \geq 0$ represents the contributions from bit flips on two or three qubits. Therefore a \emph{lower bound} on the true fidely is 
-  $$F = \sqrt{\braket{\psi | \rho | \psi}} \geq \sqrt{(1-p)^3 + 3p(1-p)^2}$$
+\item Now suppose that three qubit error-correcting code is used to protect the state $\ket{\psi} = a \ket{0_L} + b \ket{1_L}$. The quantum state after noise and error correction is 
+$$\rho = [(1-p)^3 + 3p(1-p)^2] \ket{\psi} \bra{\psi} + \hat{\varepsilon}$$
+Where $\hat{\varepsilon} \geq 0$ represents the contributions from bit flips on two or three qubits. Therefore a \emph{lower bound} on the true fidely is 
+$$F = \sqrt{\braket{\psi | \rho | \psi}} \geq \sqrt{(1-p)^3 + 3p(1-p)^2}$$
 \end{itemize}
 
 \paragraph{Generalization} 
@@ -308,10 +308,10 @@ What is crucial to the success of these measurments is that neither of them give
 While the bit flip code is interesting, it does not appear to be a significant innovation over classical error-correcting codes, and leaves many other kinds of error untreated. 
 
 \begin{definition}
-  A more intresting noisy quantum channel is the \emph{phase flip} error model for a single qubit. In tihs model the 
-  qubit is left untouched with probability $1-p$, and with probability $p$ the relative phase of the $\ket{0}$ and $\ket{1}$ states is flipped. 
-  More precisely, the phase flip operator $Z$ is applied iwth probability $p > 0$, so the state $a \ket{0} + b \ket{1}$ is taken to the state 
-  $a \ket{0} - b \ket{1}$ under the phase flip.
+A more intresting noisy quantum channel is the \emph{phase flip} error model for a single qubit. In tihs model the 
+qubit is left untouched with probability $1-p$, and with probability $p$ the relative phase of the $\ket{0}$ and $\ket{1}$ states is flipped. 
+More precisely, the phase flip operator $Z$ is applied iwth probability $p > 0$, so the state $a \ket{0} + b \ket{1}$ is taken to the state 
+$a \ket{0} - b \ket{1}$ under the phase flip.
 \end{definition}
 
 
@@ -322,42 +322,42 @@ channel with respect to the labels $+$ and $-$! Therefore we use $\ket{0_L} := \
 at appropriate points in the procedure (this is because $H$ allows us to go back and forth between the $\ket{0}, \ket{1}$ and $\ket{+}, \ket{-}$ basies).
 More explictely: 
 \begin{itemize}
-  \item \textbf{Encoding:} First we encode exactly as for the bit flip channel, then we apply $H$ to each qubit. 
-  
-  \item \textbf{Error detection:} We apply the same projective measurments, but conjugated by $H$ gates 
-  $$P_j \to H^{\otimes^3} P_j H^{\otimes^3}$$
-  Equivalently we could measure the observables
-  $$H^{\otimes^3} Z_1 Z_2 H^{\otimes^3} = X_1 X_2 \text{ and } H^{\otimes^3} Z_2 Z_3 H^{\otimes^3} = X_2 X_3$$
-  
-  \item \textbf{Error correction:} The recovery opreation is the $H$-conjugated recovery operation from the bit flip code. 
+\item \textbf{Encoding:} First we encode exactly as for the bit flip channel, then we apply $H$ to each qubit. 
+
+\item \textbf{Error detection:} We apply the same projective measurments, but conjugated by $H$ gates 
+$$P_j \to H^{\otimes^3} P_j H^{\otimes^3}$$
+Equivalently we could measure the observables
+$$H^{\otimes^3} Z_1 Z_2 H^{\otimes^3} = X_1 X_2 \text{ and } H^{\otimes^3} Z_2 Z_3 H^{\otimes^3} = X_2 X_3$$
+
+\item \textbf{Error correction:} The recovery opreation is the $H$-conjugated recovery operation from the bit flip code. 
 \end{itemize}
 
 Obviously, this code for the phase flip channel has the same characteristics as the code for the bit flip channel (minimum fidelity, improvement over no-error correction, \dots). We say that these two channels are unitarily equivalent. 
 
 \begin{definition}
-  We say that two channels are \emph{unitarily equivalent} if and only if there exists a unitary operator $U$ such that the action of one channel is the same as the other provided that the first channel 
-  is preceded by $U$ and followed by $U^\dagger$. There operations may be trivially incorporated into the econding and error-correction operations. 
+We say that two channels are \emph{unitarily equivalent} if and only if there exists a unitary operator $U$ such that the action of one channel is the same as the other provided that the first channel 
+is preceded by $U$ and followed by $U^\dagger$. There operations may be trivially incorporated into the econding and error-correction operations. 
 \end{definition}
 
 \subsection{The Shor code}
 The \emph{Shor code} is simple quantum code which can protect against the effects of an \emph{arbitrary} error on a single qubit. 
 The code is a combination of the three qubit phase flip and bit flip codes: 
 \begin{itemize}
-  \item We first encode the qubit using the phase flip code 
-  $$\ket{0} \to \ket{+++}, \, \ket{1} \to \ket{---}$$
+\item We first encode the qubit using the phase flip code 
+$$\ket{0} \to \ket{+++}, \, \ket{1} \to \ket{---}$$
 
-  \item Next, we encode each of these qubits using the three qubit bit flip code: 
-  $$\ket{+} \to \sqrt{2} \left(\ket{000} + \ket{111}\right), \, \ket{-} \to \left(\ket{000} - \ket{111}\right)$$
+\item Next, we encode each of these qubits using the three qubit bit flip code: 
+$$\ket{+} \to \sqrt{2} \left(\ket{000} + \ket{111}\right), \, \ket{-} \to \left(\ket{000} - \ket{111}\right)$$
 \end{itemize}
 The result is a nince qubit code with codewords given by: 
 \begin{align*}
-  \ket{0} &\to \ket{0_L} \equiv \frac{(\ket{000} + \ket{111}) (\ket{000} + \ket{111})(\ket{000} + \ket{111})}{2 \sqrt{2}} \\
-  \ket{1} &\to \ket{1_l} \equiv \frac{(\ket{000} - \ket{111}) (\ket{000} - \ket{111})(\ket{000} - \ket{111})}{2 \sqrt{2}}
+\ket{0} &\to \ket{0_L} \equiv \frac{(\ket{000} + \ket{111}) (\ket{000} + \ket{111})(\ket{000} + \ket{111})}{2 \sqrt{2}} \\
+\ket{1} &\to \ket{1_l} \equiv \frac{(\ket{000} - \ket{111}) (\ket{000} - \ket{111})(\ket{000} - \ket{111})}{2 \sqrt{2}}
 \end{align*}
 
 \begin{definition}
-  This method of encoding using a hierarchy of levels is known as \emph{concatenation}. It is a great trick for obtaining 
-  new code from old, but also to prove some important results about QEC. 
+This method of encoding using a hierarchy of levels is known as \emph{concatenation}. It is a great trick for obtaining 
+new code from old, but also to prove some important results about QEC. 
 \end{definition}
 
 \paragraph{Correcting bit flips}
@@ -390,21 +390,21 @@ Notice that we are able to correct a \emph{continuum} of errors that may occur o
 This discretization of the errors is central to why QEC woks, and should be regarded in contrast to classical error-correction where this discretization is impossible. 
 
 \begin{proof} \label{thm:Shor-correcting-arbitrary-errors}
-  To simplify the analysis, suppose arbitrary noise is occuring on the first qubit only. We will describe 
-  the noise by a trace-preserving quantum operation $\mathcal{E}$. We will do this by expanding $\mathcal{E}$ in an operator-sum
-  representation with operation elements $\{E_i\}$. Supposing the state of the encoded qubit is $\ket{\psi} = \alpha \ket{0_L} + \beta \ket{1_L}$ before the noise acts, 
-  then after the effect of noise we get the state
-  $$\mathcal{E} \left(\ket{\psi} \bra{\psi}\right) = \sum_i E_i \ket{\psi} \bra{\psi} E_i^\dagger$$
-  We will focus on the effect of error correction on an arbitrary term in this sum $E_i \ket{\psi} \bra{\ket} E_i^\dagger$. 
-  As an opreator on the first qubit, $E_i$ may be expanded as a linear combination of $I, \, X_1, \, Z_2, \, X_1 Z_1$: 
-  $$E_i = e_{i0} I + e_{i1} X_1 + e_{i2} Z_1 + e_{i3} X_1 Z_1$$
-  Therefore the (un-normalized) quantum state $E_i \ket{psi}$ can be written as a superposion of four terms 
-  $\ket{\psi}, \, X_1 \ket{\psi},\, Z_1 \ket{\psi}, \, X_1 Z_1 \ket{\psi}$ from which recovery may be performed by applying approriate inversion operations, resulting in 
-  $\ket{\psi}$. 
-  
-  Thus error correction results in the original state $\ket{\psi}$, despite the fact that error correction on the first qubit 
-  was arbitrary. Notice that by just correcting a discrete set of errorsL the bit flip, the phase flip and the combined bit-phase flip, a quantum-error 
-  correcting code is able to correct a continuous class of errors.
+To simplify the analysis, suppose arbitrary noise is occuring on the first qubit only. We will describe 
+the noise by a trace-preserving quantum operation $\mathcal{E}$. We will do this by expanding $\mathcal{E}$ in an operator-sum
+representation with operation elements $\{E_i\}$. Supposing the state of the encoded qubit is $\ket{\psi} = \alpha \ket{0_L} + \beta \ket{1_L}$ before the noise acts, 
+then after the effect of noise we get the state
+$$\mathcal{E} \left(\ket{\psi} \bra{\psi}\right) = \sum_i E_i \ket{\psi} \bra{\psi} E_i^\dagger$$
+We will focus on the effect of error correction on an arbitrary term in this sum $E_i \ket{\psi} \bra{\ket} E_i^\dagger$. 
+As an opreator on the first qubit, $E_i$ may be expanded as a linear combination of $I, \, X_1, \, Z_2, \, X_1 Z_1$: 
+$$E_i = e_{i0} I + e_{i1} X_1 + e_{i2} Z_1 + e_{i3} X_1 Z_1$$
+Therefore the (un-normalized) quantum state $E_i \ket{psi}$ can be written as a superposion of four terms 
+$\ket{\psi}, \, X_1 \ket{\psi},\, Z_1 \ket{\psi}, \, X_1 Z_1 \ket{\psi}$ from which recovery may be performed by applying approriate inversion operations, resulting in 
+$\ket{\psi}$. 
+
+Thus error correction results in the original state $\ket{\psi}$, despite the fact that error correction on the first qubit 
+was arbitrary. Notice that by just correcting a discrete set of errorsL the bit flip, the phase flip and the combined bit-phase flip, a quantum-error 
+correcting code is able to correct a continuous class of errors.
 \end{proof}
 
 If the noise is affecting more than just the first qubit, we have two basic ideas. If it is a good approximation to assume that noise 
@@ -423,9 +423,9 @@ correspond to undeformed and orthogonal subspaces of the Hilbert space.
 
 To develop a general theory of QEC, we just make two very broad assumptions: 
 \begin{enumerate}
-  \item the noise is described by a quantum operation $\mathcal{E}$. 
-  \item The complete error-correction procedure is effect by a trace preserving quantum operation $\mathcal{R}$, 
-  which we call the \emph{error-correction operation}. Note that it bundles into one piece error-detection and recovery.  
+\item the noise is described by a quantum operation $\mathcal{E}$. 
+\item The complete error-correction procedure is effect by a trace preserving quantum operation $\mathcal{R}$, 
+which we call the \emph{error-correction operation}. Note that it bundles into one piece error-detection and recovery.  
 \end{enumerate}
 In order for the error-correction to be successful, we require that for any state $\rho$ whose support lies in $C$, 
 $$(\mathcal{R} \circ \mathcal{E}) (\rho) \propto \rho$$
@@ -435,13 +435,13 @@ Note that we are using $\propto$ instead of $=$ since we may be interested in er
 The \emph{quantum error-correction conditions} are a simple set of equations which can be checked to determine whether a quantum error correcting code protects against a particular type of noise $\mathcal{E}$. 
 
 \begin{theorem}[Quantum error-correction conditions] \label{thm:quantum-error-correction-conditions}
-  Let $C$ be a quantum code, and $P$ be the projector onto $C$. Suppose $\mathcal{E}$ is a quantum opreation with operational elements 
-  $\{E_i\}$. There exists an error-correction opreation $\mathcal{R}$ correcting $\mathcal{E}$ on $C$ if an only if 
-  $$P E_i^\dagger E_j P = \alpha_{ij} P$$
-  for some Hermitial matrix $\alpha$ of complex numbers. 
+Let $C$ be a quantum code, and $P$ be the projector onto $C$. Suppose $\mathcal{E}$ is a quantum opreation with operational elements 
+$\{E_i\}$. There exists an error-correction opreation $\mathcal{R}$ correcting $\mathcal{E}$ on $C$ if an only if 
+$$P E_i^\dagger E_j P = \alpha_{ij} P$$
+for some Hermitial matrix $\alpha$ of complex numbers. 
 
-  We call the operation elements $\{E_i\}$ for the noise $\mathcal{E}$ \emph{errors}, and if such an $\mathcal{R}$ exists, 
-  we say that $\{E_i\}$ constitutes a \emph{correctable set of errors}.
+We call the operation elements $\{E_i\}$ for the noise $\mathcal{E}$ \emph{errors}, and if such an $\mathcal{R}$ exists, 
+we say that $\{E_i\}$ constitutes a \emph{correctable set of errors}.
 \end{theorem}
 
 \subsection{Discretization of the errors}
@@ -452,10 +452,10 @@ Ideally, we would have a code $C$ and error-correction operation $\mathcal{R}$ t
 noise processes. We will adapt the quantum error-correction conditions for this type of protection. 
 
 \begin{theorem}
-  Let $C$ be a quantum code and $\mathcal{R}$ be the error-correction operation constructed by Theorem \ref{thm:quantum-error-correction-conditions}
-  to recover a from noise process $\mathcal{E}$ with operational elements $\{E_i\}$. Suppose $\mathcal{F}$ is a quantum opreation with operation $\{F_j\}$ which 
-  are \emph{linear combinations} of the $E_i$ ($F_j = \sum_i m_{ji} E_i)$.  Then the error-correction operation $\mathcal{R}$ also corrects for the effects of the noise 
-  process $\mathcal{F}$ on the code $C$. 
+Let $C$ be a quantum code and $\mathcal{R}$ be the error-correction operation constructed by Theorem \ref{thm:quantum-error-correction-conditions}
+to recover a from noise process $\mathcal{E}$ with operational elements $\{E_i\}$. Suppose $\mathcal{F}$ is a quantum opreation with operation $\{F_j\}$ which 
+are \emph{linear combinations} of the $E_i$ ($F_j = \sum_i m_{ji} E_i)$.  Then the error-correction operation $\mathcal{R}$ also corrects for the effects of the noise 
+process $\mathcal{F}$ on the code $C$. 
 \end{theorem}
 This results enables the introduction of powerful language to describe quantum error-correcting codes. Instead of talking about 
 the class of error process $\mathcal{E}$ correctable by a code $C$ and error-correction operation $\mathcal{R}$, we talk about a set of \emph{errors} $\{E_i\}$ which are correctable.
@@ -476,11 +476,11 @@ inplies the ability to error-correct an \emph{arbitrary} single qubit quantum op
 \subsection{The quantum Hamming bound} 
 
 \begin{definition}
-  A code is said to be \emph{degenerate} if we have two different errors that have the same effect 
-  on codewords. 
-  
-  A simple example is that of the Shor code where the errors $Z_1$ and $Z_2$ both flip the phase of the first block of the 
-  codewords of the Shor code. 
+A code is said to be \emph{degenerate} if we have two different errors that have the same effect 
+on codewords. 
+
+A simple example is that of the Shor code where the errors $Z_1$ and $Z_2$ both flip the phase of the first block of the 
+codewords of the Shor code. 
 \end{definition}
 
 Unfortunately, the \emph{quantum Hamming bound} only applies to non-degenerate codes, but it gives us an idea of what more general bounds 
@@ -493,9 +493,9 @@ In order to encode $k$ qubits in a non-degenerate way each of these errors must 
 subspaces must be fitten into the total $2^n$-dimensional space available to $n$ qubits, leading the the inequality \ref{thm:quantum-hamming-bound}
 
 \begin{theorem}[The quantum Hamming bound] \label{thm:quantum-hamming-bound}
-  Suppose we want to encode (non-degenerately) $k$ qubits, with a block size of $n$ qubits such that we can correct any subset of 
-  $j \leq t$ errors. Therefore the following inequality must hold 
-  $$\sum_{j = 0}^{t} \binom{n}{j} 3^j 2^k \leq 2^n$$ 
+Suppose we want to encode (non-degenerately) $k$ qubits, with a block size of $n$ qubits such that we can correct any subset of 
+$j \leq t$ errors. Therefore the following inequality must hold 
+$$\sum_{j = 0}^{t} \binom{n}{j} 3^j 2^k \leq 2^n$$ 
 \end{theorem}
 
 Of course, not all quantum codes are non-degenerate, so the quantum Hamming bound is more useful as a rule of thumb than as a hard 
@@ -506,20 +506,20 @@ bound on the existence of quantum codes (As of today, there are no known codes w
 \subsection{Carlderbank-Shor-Steane codes}
 CSS codes are an important subclass of the more general class of \emph{stabilizer} codes. 
 \begin{definition}
-  Let $C_1$ and $C_2$ be $[n, k_1]$ and $[n, k_2]$ classical linear codes over $\mathbb{F_2}$ such that $C_2 \subset C_1$ and $C_1$ and $C_2^\perp$ both correct 
-  $t$ errors. We define the \emph{CSS code of $C_1$ over $C_2$ $\operatorname{CSS}(C_1, C_2)$} to be an $[n, k_1 - k_2]$ quantum code capable of correcting errors on $t$ qubits via the following construction: \\
-  Let $x \in C_1$ be an arbitrary codeword in $C_1$, we define the quantum state $\ket{x + C_2}$ to be 
-  $$\ket{x + C_2} := \frac{1}{\sqrt{|C_2|}} \sum_{y \in C_2} \ket{x + y}$$
-  Let $x' \in C_1$ such that $x - x' \in C_2$, then clearly $\ket{x + C_2} = \ket{x' + C_2}$, therefore the state $\ket{x + C_2}$ depends only upon the coser $C_1 / C_2$ which $x$ is in. 
-  Moreover, if $x$ and $x'$ belong to different cosets of $C_2$, then for no $y, y' \in C_2$ does $x + y = x' + y'$, and therefore $\ket{x + C_2}$ and $\ket{x' + C_2}$ are orthonormal states. 
-  
-  The quantum code $\operatorname{CSS}(C_1, C_2)$ is defined to be vector space spanned by the states $\ket{x + C_2}$ for all $x \in C_1$. 
-  The dimension of $\operatorname{CSS}(C_1, C_2)$ is $|C_1|/|C_2| = 2^{k_1 - k_2}$, and therefore $\operatorname{CSS}(C_1, C_2)$ is an 
-  $[n, k_1 - k_2]$ quantum code.
+Let $C_1$ and $C_2$ be $[n, k_1]$ and $[n, k_2]$ classical linear codes over $\mathbb{F_2}$ such that $C_2 \subset C_1$ and $C_1$ and $C_2^\perp$ both correct 
+$t$ errors. We define the \emph{CSS code of $C_1$ over $C_2$ $\operatorname{CSS}(C_1, C_2)$} to be an $[n, k_1 - k_2]$ quantum code capable of correcting errors on $t$ qubits via the following construction: \\
+Let $x \in C_1$ be an arbitrary codeword in $C_1$, we define the quantum state $\ket{x + C_2}$ to be 
+$$\ket{x + C_2} := \frac{1}{\sqrt{|C_2|}} \sum_{y \in C_2} \ket{x + y}$$
+Let $x' \in C_1$ such that $x - x' \in C_2$, then clearly $\ket{x + C_2} = \ket{x' + C_2}$, therefore the state $\ket{x + C_2}$ depends only upon the coser $C_1 / C_2$ which $x$ is in. 
+Moreover, if $x$ and $x'$ belong to different cosets of $C_2$, then for no $y, y' \in C_2$ does $x + y = x' + y'$, and therefore $\ket{x + C_2}$ and $\ket{x' + C_2}$ are orthonormal states. 
 
-  We can exploit the classical error-correcting properties of $C_1$ and $C_2^\perp$ to detect and correct quantum errors. 
-  In fact it is possible to correct and detect up to $t$ bit and phase flip errors on $\operatorname{CSS}(C_1, C_2)$ by making use 
-  of the properties of $C_1 $and $C_2^\perp$ respectively. 
+The quantum code $\operatorname{CSS}(C_1, C_2)$ is defined to be vector space spanned by the states $\ket{x + C_2}$ for all $x \in C_1$. 
+The dimension of $\operatorname{CSS}(C_1, C_2)$ is $|C_1|/|C_2| = 2^{k_1 - k_2}$, and therefore $\operatorname{CSS}(C_1, C_2)$ is an 
+$[n, k_1 - k_2]$ quantum code.
+
+We can exploit the classical error-correcting properties of $C_1$ and $C_2^\perp$ to detect and correct quantum errors. 
+In fact it is possible to correct and detect up to $t$ bit and phase flip errors on $\operatorname{CSS}(C_1, C_2)$ by making use 
+of the properties of $C_1 $and $C_2^\perp$ respectively. 
 \end{definition}
 
 \paragraph{Correcting bit-flips}
@@ -580,10 +580,21 @@ H(x) \;=\; -\,x\log_{2}x \;-\;(1-x)\log_{2}(1-x)
 \] 
 And Thus, good quantum error-correcting codes exist, provided we don't pack too many qubits $k$ into an $n$ qubit code. 
 
+\paragraph{Summary} 
+Let $C_1$ and $C_2$ be $[n, k_1]$ and $[n, k_2]$ classical linear codes such that $C_2 \subset C_1$, and both $C_1$ and $C_2^\perp$ can correct errors on up to $t$ bits. 
+Then $\operatorname{CSS}(C_1, C_2)$ is a $[n, k_1 - k_2]$ quantum error-correcting code which can correct arbitrary errors on $t$ qubits. 
+Furthermore, the error-detection and correction steps require only the application of Hadamard and CNOT gates, in each case a number linear in the size of the code. Encoding and decoding can also be performed in a linear number 
+of gates in the code. 
+
+\paragraph{Notation} 
+The codes defined by 
+$$\ket{x + C_2} := \frac{1}{\sqrt{|C_2|}} \sum_{y \in C_2} (-1)^{u \cdot y} \ket{x + y + v}$$
+and parametrized by $u, v \in \mathbb{F}_2^n$ are \emph{equivalent} to $\operatorname{CSS}(C_1, C_2)$. 
+We denote these code by $\operatorname{CSS}_{u, v}(C_1, C_2)$. 
 \section{References}
 The material is adapted from: 
 \begin{quote}
-    \textbf{A. Nielsen and I. Chuang's} book \emph{Quantum Computation and Quantum Information} (Cambridge University Press, 2010).
+\textbf{A. Nielsen and I. Chuang's} book \emph{Quantum Computation and Quantum Information} (Cambridge University Press, 2010).
 \end{quote}
 Page or chapter references will are given in the text where relevant. 
 \end{document}
