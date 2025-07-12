@@ -640,6 +640,95 @@ H(x) \;=\; -\,x\log_{2}x \;-\;(1-x)\log_{2}(1-x)
 \] 
 And Thus, good quantum error-correcting codes exist, provided we don't pack too many qubits $k$ into an $n$ qubit code. 
 
+\section{Stabilizer codes} 
+\emph{Stabilizer} (or \emph{additive}) quantum codes, are a class of quantum whose construction is similar to that of classical 
+linear codes. In order to understand stabilizer codes it is useful to first develop the \emph{stabilizer formalism}, 
+a powerful method for understanding a wide class of operations in quantum mechanics. 
+
+\subsection{The stabilizer formalism} 
+The central insight of the stabilizer formalism is easily illustrated by an example. Consider an EPR pair 
+$$\ket{\psi} = \frac{\ket{00} + \ket{11}}{\sqrt{2}}$$
+It is easy to verify that $X_1 X_2 \ket{\psi} = \ket{\psi}$ and that $Z_1 Z_2 \ket{\psi} = \ket{\psi}$; we say that the 
+state $\ket{\psi}$ is \emph{stabilized} by the operators $X_1 X_2$ and $Z_1 Z_2$. Less obviously, 
+the state $\ket{\psi}$ is the unique quantum state (up to global phase) which is stabilized by thesse operators. 
+
+The basic idea of the stabilizer formalism is that many quantum states are easily described by working with the operators 
+that stabilize them. It turns out that many quantum codes (including CSS codes and the Shor code) can be much more compactly described 
+using the stabilizers than the state vector description. Even more importantly, errors on the qubits / operations
+(such as Hadamard gate, phase gate, CNOT gate) and measurement in the computational basis are all easily desxribed using the 
+stabilizer formalism. 
+
+\begin{definition}
+    The general \emph{Pauli Group} $G_n$ on $n$ qubits is the group consisting of all $n$-fold tensor 
+    products of the Pauli matrices, together with multiplicative factors of $\pm 1, \pm i$.
+
+    Notice that for a single qubit, the Pauli group is 
+    $$G_1 := \{\pm I, \pm i I, \pm X, \pm i X, \pm Y, \pm iY, \pm Z, \pm iZ\}$$
+\end{definition}
+
+\begin{definition}
+    Let $S$ be a subgroup of $G_n$, and define $V_S$ to be the set of 
+    $n$ qubit states which are fixed by $S$. Then $V_S$ is the \emph{vector space staibilized by S} and $S$ is said 
+    to be the stabilizer of the space $V_S$. 
+
+    Equivalently, given $S \subset G_n$, the codespace stabilized by $S$ is 
+    $$C = \{\ket{\psi} \in (\mathbb{C}^2)^{\otimes n} \mid \ g \ket{\psi} = \ket{\psi} \quad \forall g \in S\}$$
+    or given a codespace $C$, its stabilizer is 
+    $$\operatorname{Stab}(C) = \{g \in P_n \mid \ g \ket{\psi} = \ket{\psi} \quad \forall \psi \in C\}$$
+\end{definition}
+
+Note that to check that a vector is stabilizer by a group $S$ we only need to check that 
+it is stabilized by its \emph{generators}. Which gives us a very compact way of determining $V_S$. 
+
+Some subgroups $S$ of the Pauli groups can't be used to stabilize a non-trivial vector space. 
+For example, consider the subgroup $G_1$ consisting of $\{\pm I, \pm X\}$. Obviously the only solution to 
+$$(-I) \ket{\psi} = \ket{\psi} \text{ is } \ket{\psi} = 0$$
+and therefore $G_1$ stabilizes the trivial vector space. For $S$ to stabilize a 
+non-trivial vector space if and only if the following two conditions hold
+\begin{enumerate}[label = (\alph*)]
+    \item The elements of $S$ commute
+    \item $-I \not\in S$ 
+\end{enumerate}
+
+A nice example of the stabilizer formalism is provided by the seven qubit Steane code 
+It turns out that the six generators $g_1, \cdots, g_6$ listed in the Table \ref{tab:generators-Steane} generate a stabilizer code for 
+the code space of the steane code. Note the similarity in structure between the generators in Table \ref{tab:generators-Steane} and the 
+parity check matrices for $C_1$ and $C_2^\perp$ used in the construction of the Steane code. 
+The first three generators of the stabilizer have $X$s in locations corresponding to the locations of the $1$s in the parity 
+check matrix for $ C_1$, while the final three generators have $Z$s in locations corresponding to the locations 
+of the $1$s in the parity check matrix for $C_2^\perp$.  
+
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{@{} c l @{}}
+    \toprule
+    \textbf{Name} & \textbf{Operator} \\
+    \midrule
+    $g_1$ & $I\ I \ I \ X \ X\ X\ X$ \\
+    $g_2$ & $I\ X\ X\ I\ I\,X\,X$ \\
+    $g_3$ & $X\ I\ X\ I\ X\ I\ X$ \\
+    $g_4$ & $I\ I\ I\ Z\ Z\ Z\ Z$ \\
+    $g_5$ & $I\ Z\ Z\ I\ I\ Z\ Z$ \\
+    $g_6$ & $Z\ I\ Z\ I\ Z\ I\ Z$ \\
+    \bottomrule
+  \end{tabular}
+  \caption{Generators of the Steane code}\label{tab:generators-Steane}
+\end{table}
+
+\paragraph{Independent generators}
+In practice, we want our generators $g_1, \cdots, g_l$ to be \emph{independent}, in the sense that 
+removing any generator $g_i$ makes the generator group smaller. 
+Determining whether a particular set of generators is independent is time consuming, fortunately 
+there is a simple way this can be done based on an idea known as the \emph{check matrix}.
+
+\begin{definition}
+    Let $S = \langle g_1, \cdots, g_l \rangle$, then the \emph{check matrix} is a useful way of presenting the 
+    generators $g_1, \cdots, g_l$ of $S$. 
+    This is an $l \times 2n$ matrix whose rows correspond to the generators $g_1$ through $g_l$; 
+    the left hand side of the matrix contains $1$s to indicate which generators contain $X$s and the right hand side 
+    indicates $Z$s; the presence of a $1$ on both sides indicates a $Y$ in the generator.
+\end{definition}
+
 
 \section{References}
 The material is adapted from: 
