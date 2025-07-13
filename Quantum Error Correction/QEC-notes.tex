@@ -759,6 +759,74 @@ corresponding to $x$ and $y$ commute or not.
     from $G_n$ such that $-I \not\in S$. Then $V_S$ is a $2^k$-dimensional vector space. 
 \end{proposition}
 
+\subsection{Unitary gates and the stabilizer formalism} 
+So far, we have used stabilizers to describe vector spaces. The formalism 
+can also be used to describe the \emph{dynamics} of those vector spaces  in 
+the larger state space under a variety of quantum operations. 
+This is especially useful to desribe quantum error-correcting codes using stabilizers, and would like to have 
+an elegant means for understanding the effects of noise and dynamical processes on those codes. 
+
+Suppose we apply some unitary $U$ to a vector space $V_S$ stabilized by the group $S$. Let $\ket{\psi}$ be an element of $V_S$, 
+then for any element $g \in S$, 
+$$U \ket{\psi} = U g \ket{\psi} = U g U^\dagger U \ket{\psi}$$
+and therefore $U \ket{\psi}$ is stabilizer by $U g U^\dagger$, hence $U V_S$ is stabilized by the group 
+$$USU^\dagger = \{U g U^\dagger \mid g \in S\}$$ 
+Furthermore, if $g_1, \cdots, g_l$ generate $S$, then $U g_1 U^\dagger, \cdots, U g_l U^\dagger$ generate $U S U^\dagger$, 
+so to compute the change in stabilizer we only need to compute how it affects its generators. 
+
+This is especially useful since for certain operations $U$, this transformation is really simple, for example 
+$$H X H^\dagger = Z; \; HYH^\dagger = -Y; HZH^\dagger = X$$
+So if a Hadamard is applied to the quantum state stabilized by $Z$ ($\ket{0}$), the resulting image will be stabilized by $X$ ($\ket{+}$). 
+
+What is remarkable here is that the state vector description of the final state requires $2^n$ amplitudes to be specified, compared 
+to $O(n)$ generators of the stabilizer group $\langle X_1, \cdots, X_n\rangle$. 
+Similarly, the stabilizer formalism can give us efficient description of more complicated gates, such as the CNOT (which along with $H$ can create 
+entanglement). To understand how this work consider the effects of conjugation by CNOT ($U$ gate): 
+\begin{align}
+    U X_1 U^\dagger &= X_1 X_2 \\
+    U X_2 U^\dagger &= X_2 \\
+    U Z_1 U^\dagger &= Z_1 \\
+    U Z_2 U^\dagger &= Z_1 Z_2 
+\end{align}
+This and other useful conjugations are nicely summarized in Table \ref{tab:conjugation-table} below. 
+
+\begin{table}[ht] \label{tab:conjugation-table}
+  \centering
+  \begin{tabular}{|c|c|c|}
+    \hline\hline
+    \textbf{Operation} & \textbf{Input} & \textbf{Output} \\
+    \hline
+    \multirow{CNOT}
+      & $X_1$ & $X_1X_2$ \\
+      & $X_2$ & $X_2$    \\
+      & $Z_1$ & $Z_1$    \\
+      & $Z_2$ & $Z_1Z_2$ \\
+      & $Y_1$ & $Y_1 X_2$ \\
+    \hline
+    \multirow{$H$}
+      & $X$ & $Z$ \\
+      & $Z$ & $X$ \\
+    \hline
+    \multirow{$S$}
+      & $X$ & $Y$ \\
+      & $Z$ & $Z$ \\
+    \hline
+    \multirow{$X$}
+      & $X$  & $X$  \\
+      & $Z$  & $-Z$ \\
+    \hline
+    \multirow{$Y$}
+      & $X$  & $-X$ \\
+      & $Z$  & $-Z$ \\
+    \hline
+    \multirow{$Z$}
+      & $X$  & $-X$ \\
+      & $Z$  & $Z$  \\
+    \hline\hline
+  \end{tabular}
+\end{table}
+
+This is useful since it allows us to describe the effects of a circuit on $n$-qubits only by observing its effect on $\{Z_1 X_1, \cdots, Z_n, X_n\}$. 
 
 \section{References}
 The material is adapted from: 
