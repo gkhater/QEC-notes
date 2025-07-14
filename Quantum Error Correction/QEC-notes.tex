@@ -854,6 +854,24 @@ formalism much less convenient than circuits which only contain $H$, $S$ and CNO
 Fortunately, encoding, decoding, and error-recovery (detection + recovery) for stabilizer quantum codes can be 
 accomplished using only normalizer gates, so the stabilizer formalism stays relevant for the analysis of these codes. 
 
+\subsection{Measurment in the stabilizer formalism} 
+Measurment in the computational basis may also be easily described within the stabilizer formalism. 
+To understand how this works, imagine we make a measurment of $g \in G_n$ ($g$ is Hermitian).
+For convenience, we assume wlog that $G$ is a product of Pauli matrices with no multiplicative factor. 
+The system is assumed to be in a state $\ket{\psi}$ stabilized by $\langle g_1, \cdots, g_n\rangle$. Then 
+\begin{enumerate}
+  \item $G$ commutes with all the generators of the stabilizer. Therefore either $g$ or $-g$ is in the stabilizer. Assume wlog that $g \in \operatorname{Stab}$, hence 
+  $$ g \ket{\psi} = \psi$$
+  so the measurment yields $+1$ with probability one and thus leaves the stabilizer invariant. 
+
+  \item $g$ anti-commutes with at least one of the generators, wlog $g_1$ and wlog it commutes with $g_2, \cdots, g_n$. In this case, 
+  the prjoectors for the measurment outcomes $\pm 1$ are given by $(I \pm g) / 2$ (respectively), it can be show that 
+  $$p(+1) = p(-1) = 1/2$$
+  If the result $+1$ occurs, the new state of the system is 
+  $$\ket{\psi^+} = (I + g) \ket{\psi} / \sqrt{2}$$
+  with stabilizer $\langle g, g_2, \cdots, g_n\rangle$. Similarly if $-1$ occurs the state is stabilized by 
+  $\langle - g, g_2, \cdots, g_n \rangle$. 
+\end{enumerate}
 
 \section{References}
 The material is adapted from: 
