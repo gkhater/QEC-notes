@@ -873,6 +873,29 @@ The system is assumed to be in a state $\ket{\psi}$ stabilized by $\langle g_1, 
   $\langle - g, g_2, \cdots, g_n \rangle$. 
 \end{enumerate}
 
+\subsection{The Gottesman-Knill theorem} 
+
+\begin{theorem}[Gottesman-Knill theorem]\label{thm:Gottesman-Knill}
+    Any quantum computation on $n$ qubits that 
+    \begin{enumerate}
+      \item starts in a stabilizer state ($U \ket{\psi} ^{\otimes n}$ where $U$ is a clifford unitary)
+      \item uses only Clifford-group operations (Hadamard, phase, CNOT gates) 
+      \item Measures observables in the Pauli group (which includes in measurment in the computational basis) 
+    \end{enumerate}
+    Can be simulated efficiently on a classical computer, in time polynomial in $n$ and the number of gates.
+\end{theorem} 
+
+The way the classical simulation works is simply by keeping track of the generators of the stabilizer as the circuit is applied. 
+We simply update each of the $n$ generators describing the quantum state. Pauli gates, and measurements of the observables in 
+the Pauli group may all be simulated in $O(n^2)$ steps on a classical computer, so a quantum computation involving $m$ operations 
+from this set can be simulated in $O(m n^2)$ operations on a classical computer.
+
+\paragraph{Applications} Although not all quantum computations (and therefore entanglements) 
+can be efficeintly described within the stabilizer formalism, consider that tasks such as 
+quantum teleportation, and super-dense coding can be performed using only the $H$ and CNOT gate and 
+measurments in the computational basis, therefore they can be efficiently simulated on a classical computer. 
+Moreover, a wide variety of quantum error-correcting codes can be described within the stabilzier formalism. 
+
 \section{References}
 The material is adapted from: 
 \begin{quote}
