@@ -182,7 +182,8 @@ The angle defined above is a metric on the statespace.
 \end{proposition}
 
 \begin{theorem}[Monotonicity of the fidelity]\label{thm:Monotonicity-fidelity}
-Suppose that $\mathcal{E}$ is a trace-preserving quantum operation. Let $\rho$ and $\sigma$ be density opreators. Then 
+Suppose that $\mathcal{E}$ is a trace-preserving quantum operation. Let $\rho$ and $\sigma$ be density operators. 
+Moreover, these $\overline{Z}$ operators are indepedent from the first Then 
 $$F(\mathcal{\rho}, \mathcal{\sigma}) \geq F(\rho, \sigma)$$
 \end{theorem}
 
@@ -1116,7 +1117,61 @@ Indeed, this code is exactly $\operatorname{CSS}(C_1, C_2)$, and it is capable o
 The Steane code is an example of a CSS code with generators in Table \ref{tab:generators-Steane}. Encoded $Z$ and $X$ operators 
 may be defined as 
 $$\overline{Z} = Z^{\otimes 7}; \; \overline{X} = X^{\otimes 7}$$
+
+
+\subsection{Standard form of a stabilizer code} 
+The construction of logical $Z$ and $X$ operators for a stabilizer code is made much easier to understand if we 
+put the code in \emph{standard form}. Consider the $n-k \times 2n$ check matrix of an $[n,k]$ stabilizer code $C$: 
+$$G = \begin{pmatrix}
+  G_1 & G_2
+\end{pmatrix}$$ 
+Swapping rows of this matrix corresponds to relabeling generators, swapping corresponding columns 
+on both sides correspomds to relabeling qubits, adding two rows corresponds to relabeling generators. 
+Notice that we can always replace $g_i$ by $g_i g_j$ for $j \neq i$. 
+
+\begin{definition}
+  We say that a code with check matrix of the form 
+  \[
   
+    \begin{array}{r}
+      r \left\{ \right. &\\[1ex]
+      n - k - r \left\{ \right.&
+    \end{array}
+  \;\;
+  \left[
+    \begin{array}{@{}ccc|ccc@{}}
+      \overbrace{I}^{r} 
+        & \overbrace{A_{1}}^{\,n-k-r} 
+        & \overbrace{A_{2}}^{\,k}
+      & \overbrace{B}^{r} 
+        & \overbrace{0}^{\,n-k-r} 
+        & \overbrace{C}^{\,k} \\[1ex]
+      0 & 0 & 0 & D & I & E
+    \end{array}
+  \right],
+  \]
+  is in standard form. 
+
+  It can be shown that any stabilizer code is equivalent to a code in this form. 
+\end{definition}
+
+Given the standard form for a quantum code, it is easy to define encoded $Z$ 
+operations for the code. Suppose we write the check matrix for these $k$ encoded $Z$ operators 
+in the form
+$$G_z \left[F_1 F_2 F_3 \mid F_4 F_5 F_6\right]$$
+where all the matrices have $k$ rows and $r, n-k-r, r, r, n-k-r, r$ columns respectively. Choose these such that 
+$$G_z = \left[000 \mid A_2^T 0 I\right]$$
+It is clear that the encded $Z$ operators commute with the elements of the stabilizer, and with one another 
+(since they only contain $Z$ operators).
+Moreover, these $\overline{Z}$ operators are indepedent from the first $r$ rows since they don't 
+contain $X$ terms, and they're indepedent from the last $n-k-r$ generators because of the 
+$I_{n-k-r}$ appearing in the check matrix of those generators. 
+
+Similarly, we pick the encoded $X$ operators with the $k \times 2n$ check matrix 
+$$G_x = \left[0 E^T I \mid C^T 0 0\right]$$
+which are independent of one another, of the generators and of the $\overline{Z}$, commute with the generators, and with $\overline{Z_j}$ for $j \neq i$, anti-commute for 
+$j = i$. 
+
 \section{References}
 The material is adapted from: 
 \begin{quote}
@@ -1124,3 +1179,4 @@ The material is adapted from:
 \end{quote}
 Page or chapter references will are given in the text where relevant. 
 \end{document}
+\usetikzlibrary{matrix,decorations.pathreplacing}
