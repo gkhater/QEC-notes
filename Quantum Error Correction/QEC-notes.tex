@@ -1172,6 +1172,45 @@ $$G_x = \left[0 E^T I \mid C^T 0 0\right]$$
 which are independent of one another, of the generators and of the $\overline{Z}$, commute with the generators, and with $\overline{Z_j}$ for $j \neq i$, anti-commute for 
 $j = i$. 
 
+\subsection{Quatum circuits for encoding, decoding and correction}
+One of the features of stabilizer codes is that their structure enables systematic contruction 
+of procdures for encoding, decoding and error-correction. Let us consider 
+the general case, i.e $C(S)$ is an $[n,k]$ stabilizer code with generators $g_1, \cdots, g_{n-k}$ and 
+logiacl $Z$ operators $\overline{Z_1}, \cdots, \overline{Z_k}$. 
+
+\paragraph{Encoding} Preparing an encoded $\ket{0}^{\otimes k}$ state is quite simple. 
+To do this, we start with any easily prepared state like $\ket{0}^{\otimes n}$ and measure each of the 
+observables $g_1, \cdots, g_{n-k}, Z_1, \cdots Z_k$. Depending on the measurment outcomes, the resulting state will 
+have stabilizer 
+$$\langle \pm g_1, \cdots, \pm g_{n-k}, \pm Z_1, \cdots, \pm Z_k\rangle$$ 
+The signs of all the stabilizer generators and the $\overline{Z_j}$ can then be fixed by applying products of 
+Pauli operators, giving us a state stabilized by 
+$$\langle g_1, \cdots, g_{n-k}, \overline{Z_1}, \cdots, \overline{Z_k} \rangle$$
+
+Once this state is prepared, we can encode any logical state $\ket{x_1 \cdots x_k}$ by applying the corresponding 
+logical $X$ operators. 
+
+\paragraph{Decoding} Decoding quantum codes is also simple, however in many cases we don't even need a full decoding. 
+It turns out that the techniques of fault-tolerant quantum computation can be used to perform logical operations on 
+encoded data, without the need for decoding. 
+Moreover, the output of such a computation can be determined simply by measuring the logical $Z$ operators. 
+
+\paragraph{Error-correction} The error-correction procedure has already been described above, 
+and is much like the encoding procedure: simply measure each of the generators $g_1, \cdots, g_{n-k}$ 
+in turn, obtaining the syndrome $\beta_1, \cdots, \beta_{n-k}$. Classical computation is then used to 
+determine the required recovery operation $E_j^\dagger$. 
+
+\paragraph{Projecting an opreator}
+In all three cases, the  key is to understand how to measure operators. 
+This is a generalization of the normal projective measurments we have widely used, 
+in which we project a state into an eigenstate of the operator and to obtain both the 
+projected state, and an indicator of the eigenvalue. 
+
+Notice that given a gate that performs a controlled-$M$ operation ($M$ on $n$ qubits with eigenvalues $\pm 1$), we can easily 
+construct a circuit that performs a measurement of the $M$ operator. In this case, $M$ would be 
+the product of Paulis, which we need to measure during the encoding, decoding and error correction procedures for stabilizer codes. 
+
+
 \section{References}
 The material is adapted from: 
 \begin{quote}
