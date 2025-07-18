@@ -1274,12 +1274,32 @@ Let $p_{th} = 1/c$, therefore provided $l < p_{th}$ such a $k$ can be found. The
 \subsection{Fault-tolerant quantum logic}
 Recall that the $H, S, CNOT$ and $\pi/8$ gates form a universal set. We wish to express how each 
 of these gates can be implemented fault-tolerantly. 
+
 \paragraph{Normalizer operators} 
 The goal is to build fault-tolerant normalizer operations ($H, S, CNOT$ gates). Notice that gates are automatically fault-tolerant 
 if they can be implemented in a bitwise fashion (since we can insert $U U^\dagger = I$), since this ensures that errors aren't propagated. 
 We call this property the \emph{tranversality} property of an encoded quantum gate. Examples of this kind of gate in the Steane code 
 include the Clifford gates (even the $CNOT$ gate since the error may propagate forward or backwards to another block) but exclude the $\pi / 8$ gate.   
 
+\paragraph{The $\pi/8$ gate}
+The strategy to construct the fault-tolerant $\pi/8$ gate is to split to construction into three parts. 
+The first part is to simulate the $\pi/8$ using elements we know how do fault-tolerantly (Clifford gate). However, 
+there are two parts which we don't know (yet) how to make fault tolerant. 
+\begin{itemize}
+  \item The preparation of the \emph{ancilla state} for input into the circuit. 
+  \item Measurement, the failure of a single component during measurment shouldn't affect the measurment outcome. 
+\end{itemize}
+The circuit used to simulate the $\pi / 8$ gate can be observed at page $486$. 
+Note that this construction requires a fault-tolerant method to prepare 
+$$\ket{\Theta} = \frac{\ket{0} + e^{i \pi / 4} \ket{1}}{\sqrt{2}}$$
+Notice that $\ket{\Theta}$ may be produced by applying an $H$ gate then a $\pi/8$ gate. 
+Since $\ket{0}$ is a $+1$ eigenstate of $Z$, $\ket{\Theta}$ is a $+1$ eigenstate of 
+$$THZHT^\dagger = TXT^\dagger = e^{- i \pi/4} SX$$
+So $\Theta$ can then be prepared by first preparing $\ket{0}$ then fault-tolerantly measuring $e^{-i \pi / 4} SX$ 
+with appropriate action after measurment (either discarding and repeating or applying $ZSXZ = - SX$ when $-1$). 
+Note that this relies on fault-tolerant measurment, which introduces nicely the next section. 
+
+\subsection{Fault-tolerant measurment} 
 
 \section{References}
 The material is adapted from: 
