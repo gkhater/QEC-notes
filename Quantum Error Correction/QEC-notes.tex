@@ -1212,6 +1212,73 @@ the product of Paulis, which we need to measure during the encoding, decoding an
 
 Notice that this means that all these circuits can be implemented only using Clifford gates. 
 
+\section{Fault-tolerant Quantum computation}
+One of the most powerful applications of QEC is the fact that we can protect information 
+\emph{dynamically} while it undergoes \emph{computation}. 
+It turns out that arbitrarily good quantum computation can be achieved even with faulty quantum gates, given 
+that the error probability per gate is below a certain constant \emph{treshold}. 
+
+\subsection{The big picture} 
+The basic idea of fault-tolerant quantum computation is to compute directly on \emph{encoded quantum states} 
+so that we never need to decode. Given a circuit, we replace each qubit with an \emph{encoded block} of qubits, 
+and replace every gate with a \emph{procedure} for performing an \emph{encoded gate}. 
+Since errors can propagate, we also design our encoded states so that failure anywhere in the circuit 
+can propagate to a small number of qubits in each block so that error correction 
+will be effective. Such procedures are referred to as \emph{fault-tolerant} procedures. 
+
+We also must keep in mind that error-correction itself can introduce new errors on the encoded qubits. 
+This can be taken care of by using techniques similar to those used to prevent propagation of errors. 
+
+\paragraph{Fault-tolerant operations} 
+\begin{definition}
+  We defin a \emph{fault-tolerant} procedure to be a procedure such that if only one component of the procedure fails, 
+  the we have at most one error in each encoded block of qubits output from the procedure.
+
+  Similarly, a procedure for measuing an observable on a set of encoded qubits is said to be \emph{fault-tolerant} 
+  if the failure of any single component in the procedure results in an error in at most one qubit at the output of the procedure. 
+  Furthermore, we require that the measurment result reported must have probability of error $O(p^2)$, where $p$ 
+  is the probability of failure in any one of the components.
+\end{definition}
+
+To simplify the analysis, we suppose that errors on qubits are one of four types: $I, X, Y, Z$ happening randomly with 
+approriate probabilities. We also allow corrolated errors between two qubits (e.g propagation during a CNOT), but these must be tensor product of Paulis. 
+
+For any quantum gate such that the individual components might fail with probability $p$, the 
+encoded probability succeds with probability $1 - cp^2$ (we use $c \approx 10^{4}$) which means that 
+for small $p$, there is a net gain to using the econded procedure: we reduce the probability of failure 
+from $p$ to $cp^2$.
+
+\paragraph{Concatenated codes and the treshold theorem} This construction is based on 
+classical \emph{concatenated codes} which can be used to reduce the error rate achieved by computation even further. 
+The idea is to recursively apply the scheme described above for simulating a circuit using an encoded circuit, 
+constructing a hierarchy of quantum circuits $C_0, C_1, C_2, \cdots$ The construction is done in stages: \\
+In the first stage of construction, any given gate in $C_0$ is replaced in $C_1$ by a procedure performing an 
+encoded gate and error-correction. Then, each of the components in $C_1$ are replaced in $C_2$ by a fault-tolerant procedure 
+implementing an encoded version of the component, and error-correction, and so on. If we concatenate $k$ times, the failure probability 
+at the highest level is $(cp)^2k / c$, whiel the size of the circuit is $d^k$ times the size of the original circuit, 
+where $d$ is a constant representing the amximum number of operations used in a fault-tolerant procedure. 
+
+Suppose then that we want to simulate a circuit containing $p(n)$ gates, with a final 
+accuracy of $\varepsilon$ in our final simulation. To do so, each gate in the algorithm must 
+be simulated with $\varepsilon / p(n)$ accuracy, so we need $k$ such that 
+$$\frac{(cp)^2k}{c} \leq \frac{\varepsilon}{p(n)}$$
+Let $p_{th} = 1/c$, therefore provided $l < p_{th}$ such a $k$ can be found. The condition $p < p_{th}$ is known as the 
+\emph{treshold condition} for quantum computation, since provided it is satisfied, we can achieve arbitary accuracy in our quantum computations. 
+
+\begin{theorem}[Treshold theorem for quantum computation]
+  A quantum circuit containing $p(n)$ gates may be simulated with probability of error at most $\varepsilon$ using 
+  $$O\left(poly\left(log (p(n) / \varepsilon)\right) p(n)\right)$$
+  gates whose components fail with at most probability $p$, provided that $p < p_{th}$. 
+\end{theorem}
+
+\subsection{Fault-tolerant quantum logic}
+Recall that the $H, S, CNOT$ and $\pi/8$ gates form a universal set. We wish to express how each 
+of these gates can be implemented fault-tolerantly. 
+\paragraph{Normalizer operators} 
+The goal is to build fault-tolerant normalizer operations ($H, S, CNOT$ gates). Notice that gates are automatically fault-tolerant 
+if they can be implemented in a bitwise fashion (since we can insert $U U^\dagger = I$), since this ensures that errors aren't propagated. 
+We call this property the \emph{tranversality} property of an encoded quantum gate. Examples of this kind of gate in the Steane code 
+include the Clifford gates (even the $CNOT$ gate since the error may propagate forward or backwards to another block) but exclude the $\pi / 8$ gate.   
 
 
 \section{References}
