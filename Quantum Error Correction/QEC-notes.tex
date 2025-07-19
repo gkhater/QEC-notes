@@ -1300,6 +1300,18 @@ with appropriate action after measurment (either discarding and repeating or app
 Note that this relies on fault-tolerant measurment, which introduces nicely the next section. 
 
 \subsection{Fault-tolerant measurment} 
+Measurements are used to encode, read out results, diagnose syndrome, and to do ancilla state preparation, and 
+therefore are critical for fault-tolerant quantum computation. To consider a measurement to be \emph{fault-tolerant}, 
+we require that two things be true: 
+\begin{enumerate}
+  \item A single failure anywhere in the procedure should lead to at most one error in any block of qubits at the end. 
+  \item Even if a single failure occurs, we require that the result be correct with probability $1 - O(p^2)$. 
+\end{enumerate}
+
+Suppose we want to measure a single qubit observable $M$. Suppose $M$ can be given a tranversal encoded implementation 
+on a quantum code as bitwise application of some $M'$ to each qubit. Then we can measure $M$ fault-tolerantly on the 
+encoded data. By this we mean that single errors will not propagate and that we have an $O(p^2)$ probability of obtaining a wrong 
+measurment. 
 
 \section{References}
 The material is adapted from: 
