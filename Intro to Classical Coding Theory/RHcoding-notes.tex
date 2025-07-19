@@ -291,7 +291,7 @@ $$M \times \left(1 + \binom{n}{1} + \cdots + \binom{n}{t}\right) \leq 2^n$$
       \coordinate (O) at (2,1.155);   % point 6
       \def\radius{1.155}
     
-      %► Touch‐points (midpoints)
+      %► Touch-points (midpoints)
       \coordinate (P) at ($(B)!0.5!(A)$);  % point 2
       \coordinate (Q) at ($(C)!0.5!(A)$);  % point 3
       \coordinate (R) at ($(B)!0.5!(C)$);  % point 5
@@ -671,7 +671,7 @@ If the received vector $y$ is in the top part, we decode it as usual; if $y$ is 
           }
         }
       
-        % 8×4 matrix of bit‐strings
+        % 8×4 matrix of bit-strings
         \matrix (m) [
           matrix of nodes,
           nodes=bit,
@@ -693,13 +693,13 @@ If the received vector $y$ is in the top part, we decode it as usual; if $y$ is 
           ($(m-6-1.south west)+(0,-0.7ex)$) --
           ($(m-6-4.south east)+(0,-0.7ex)$);
       
-        % top‐part brace (shifted right by 0.8em)
+        % top-part brace (shifted right by 0.8em)
         \draw[partbrace]
           ($(m-1-4.east)+(0.8em,0)$) --
           ($(m-6-4.east)+(0.8em,0)$)
           node[midway, right=8pt] {top part};
       
-        % bottom‐part brace
+        % bottom-part brace
         \draw[partbrace]
           ($(m-7-4.east)+(0.8em,0)$) --
           ($(m-8-4.east)+(0.8em,0)$)
@@ -959,6 +959,15 @@ LDPC codes have the ratio $j / N \to 0$.
 
 However, we don't have an optimal decoder, and decoding these codes is an NP-complete problem. In practice,
 these codes are decoded using \emph{iterative message-passing}, which works well against random errors. 
+
+\paragraph{Tanner graph representation} 
+Every LDPC code can be represented by a bipartite graph on $n$ \emph{variable nodes} (bits) and $m$ \emph{check nodes} (parity constraints), where an edge connects variable node $v_j$ to check node $c_i$ iff $H_{i,j}=1$.  
+\begin{itemize}
+  \item \emph{Variable-node degree} = column-weight of $H$.  
+  \item \emph{Check-node degree} = row-weight of $H$.  
+  \item \emph{Girth} = length of the shortest cycle in the Tanner graph.  Larger girth improves the accuracy of iterative decoding.
+\end{itemize}
+
 \section{Reference}
 All material is adapted from: 
 \begin{quote}
