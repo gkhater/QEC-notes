@@ -896,6 +896,17 @@ column of $H$.
 
 \section{Other good codes} 
 
+
+\begin{definition}
+A family of linear codes $\{\,C_n\}_{n=1}^\infty$, where each $C_n$ is an $[n,k_n,d_n]$ code over a fixed finite field, is called \emph{good} if there exist constants $R>0$ and $\delta>0$ such that for all sufficiently large $n$:
+\[
+\frac{k_n}{n} \;\ge\; R,
+\qquad
+\frac{d_n}{n} \;\ge\; \delta,
+\]
+and with a poly-time decoding algortihm. 
+\end{definition}
+
 \subsection{Hadamard Code and Generalization} 
 
 \paragraph{Hadamard Matrices}
@@ -934,8 +945,20 @@ Note that this only allows us to construct a small subset of the Hadamard matric
     we have constructed a $(n, 2n, 1/2 n)$ code (For $n = 8$, this is an extended Hamming code). 
 \end{definition}
 
+\subsection{Low-Density Parity-Check Codes} 
+\begin{definition}
+    A \emph{low-density parity-check code} (or Gallager code) is a block code that has a parity check matrix $H$, 
+    every row and column of which is sparse. 
 
+    A \emph{regular} LDPC is a code in which every column of $H$ has the same weight $j$ and every row has the same 
+    weight $k$. 
+\end{definition}
 
+For any column weight $j \geq 3$, LDPC codes are \emph{good codes}. Moreover, some sequences of 
+LDPC codes have the ratio $j / N \to 0$.  
+
+However, we don't have an optimal decoder, and decoding these codes is an NP-complete problem. In practice,
+these codes are decoded using \emph{iterative message-passing}, which works well against random errors. 
 \section{Reference}
 All material is adapted from: 
 \begin{quote}
