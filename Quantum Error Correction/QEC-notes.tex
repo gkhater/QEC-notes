@@ -508,7 +508,7 @@ bound on the existence of quantum codes (As of today, there are no known codes w
 \subsection{Carlderbank-Shor-Steane codes}
 CSS codes are an important subclass of the more general class of \emph{stabilizer} codes. 
 \begin{definition}
-Let $C_1$ and $C_2$ be $[n, k_1]$ and $[n, k_2]$ classical linear codes over $\mathbb{F_2}$ such that $C_2 \subset C_1$ and $C_1$ and $C_2^\perp$ both correct 
+Let $C_1$ and $C_2$ be $[n, k_1]$ and $[n, k_2]$ classical linear codes over $\mathbb{F}_2why $ such that $C_2 \subset C_1$ and $C_1$ and $C_2^\perp$ both correct 
 $t$ errors. We define the \emph{CSS code of $C_1$ over $C_2$ $\operatorname{CSS}(C_1, C_2)$} to be an $[n, k_1 - k_2]$ quantum code capable of correcting errors on $t$ qubits via the following construction: \\
 Let $x \in C_1$ be an arbitrary codeword in $C_1$, we define the quantum state $\ket{x + C_2}$ to be 
 $$\ket{x + C_2} := \frac{1}{\sqrt{|C_2|}} \sum_{y \in C_2} \ket{x + y}$$
@@ -1312,6 +1312,61 @@ Suppose we want to measure a single qubit observable $M$. Suppose $M$ can be giv
 on a quantum code as bitwise application of some $M'$ to each qubit. Then we can measure $M$ fault-tolerantly on the 
 encoded data. By this we mean that single errors will not propagate and that we have an $O(p^2)$ probability of obtaining a wrong 
 measurment. 
+
+\section{Toric codes} 
+Note that the reference used for toric codes is concise and clear, so this will just cover the core concepts in 
+case I need a quick reminder. \\
+The \emph{toric code} is a $CSS$ code defined on the torus. Therefore we must introduce some new notation. 
+ 
+\subsection{The torus} 
+We cellulate the torus by laying a square grid on the surface. 
+We have three types of objects of interest: 
+\begin{itemize}
+  \item Vertices: Where two lines intersect. 
+  \item Edges: the segment connecting two neighboring vertices. 
+  \item Plaquettes: the squares formed by four neighboring edges. 
+\end{itemize}
+Notice that in an $L \times L$ torus, there are $L^2$ vertices and plaquettes, whereas there 
+are $2 L^2$ edges. 
+
+\subsection{Classical codes on the Torus} 
+Like all $CSS$ codes, before defining the Toric code we need to define two classical codes on the torus. Note that bistrings for codewords 
+are read from left to right, and from top to bottom. The codes on the Torus are
+\begin{itemize}
+  \item \emph{The vertex code $C_x$}, there will be a parity in $C_x$ for each vertex on the Torus. This parity check enforces 
+  that the number of $1$'s on the edges incident to $v$ must be even. 
+
+  \item \emph{The plaquette code $C_z$}, there will be a parity check in $C_z$ enforcing that the 
+  number of $1$'s on the edges bordering the plaquette $p$ must be even. 
+\end{itemize}
+Now that $C_x$ and $C_z$ have been defined, it can easily be show that $C_x$ and $C_z$ can be used 
+to form a CSS code (since $\forall h_x, h_z \in C_x^{\perp}, C_z^\perp, \, h_x \cdot h_z = 0$).  
+More precisely, we have that 
+$$C_z \subseteq C_x^\perp \text{ or equivalently } C_x \subseteq C_Z^\perp$$
+
+\paragraph{Properties of these classical codes}
+We start by describing all the strings in $C_x$: \\
+Imagine flipping on a bit on some edge $e = \{u, v\}$ (on the empty grid for example). The two parity checks centered at $u$ and $v$ are now violated. 
+To restore these, we flip another bit at edges incident to these two vertices, which in turn violates two new 
+parity checks. This process continues forming a path of $1$s in the grid until the two endpoints meet to form a closed loop. 
+Therefore, the strings in $C_x$ correspond to the edges of \emph{closed loops} in the grid, and their linear combinations. 
+\begin{corollary}
+  The distance of $C_x$ is at most $4$ for any $L$, this is because we can always turn on the $4$ edges of a 
+  plaquette. 
+\end{corollary}
+
+Also note that since $C_z^\perp \susbeteq C_x$, the border of any set of plaquettes is a set of closed loops. 
+Additionally, the set of all plaquette parity checks in $C_z^\perp$ is not independent because every edge borders two 
+plaquettes, so 
+$$\sum_p h_{z,p} = 0$$
+where the sum is taken over all plaquettes. However, if we take any proper subset of the set of plaquettes, and sum over thoes 
+parity checks, we get a non-zero answer. So for any particular plaquette $p^*$, the set 
+$\{h_{z,p}\}_{p \neq p^*}$ forms a basis for $C_z^\perp$. So the dimension of $C_z^\perp$ is $L^2 - 1$. 
+
+To understand the structure of the codewords in $C_z$ and parity checks in $C_x^\perp$, we make use of the Dual Lattice (view reference). This dual 
+lattice is isomorphic to the original lattice, but parity checks on the plaquettes map to $C_x$ and on the edges to $C_z$. Therefore we can apply the same reasonning 
+in the dual lattice (which is also $L \times L$) to understand the structure of $C_z$ and $C_x^\perp$. 
+
 
 \section{References}
 The material is adapted from: 
