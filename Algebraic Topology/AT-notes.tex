@@ -343,4 +343,22 @@ Given a net \((x_j)_{j\in J}\), the composition \((x_{h(i)})_{i\in I}\) is calle
   \item Nets generalize sequences and allow characterization of continuity, compactness, and closure in arbitrary topological spaces.
 \end{itemize}
 
+\paragraph{Some easy characterizations of Sets} 
+\begin{enumerate}[label = (\alph*)]
+  \item $y \in \mathring{A} \iff y$ has a neighborhood contained in $A$. 
+  \item $y \in \partial A \iff$ every neighborhood of $y$ contains a point of $A$ and 
+  a point of $X \setminus A$. 
+  \item $y \in \overline{A} \iff$ every neighborhood of $y$ contains a point in $A$. 
+  \item $\overline{A} = A \cup \partial A = \mathring{A} \cup \partial A$ 
+  \item $\mathring{A}, \operatorname{Ext}(A)$ are open, $\overline{A}, \partial A$ are closed. 
+  \item \begin{align*}
+    A \text{ open} &\iff A = \mathring{A} \\
+    &\iff A \text{ contains a none of its boundary points}
+  \end{align*}
+  \item \begin{align*}
+    A \text{ closed} &\iff A = \overline{A} \\
+    &\iff A \text{ contains all its boundary points}
+  \end{align*}
+\end{enumerate}
+
 \end{document}
