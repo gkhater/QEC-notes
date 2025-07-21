@@ -1,0 +1,346 @@
+%===============================================
+%   rhnotes.tex — Framework for RH-coding Notes
+%===============================================
+\documentclass[11pt,a4paper]{article}
+
+%----- ENHANCED TYPOGRAPHY -----
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}        % clean vector font
+\usepackage{microtype}      % better justification & kerning
+\usepackage{palatino} 
+\usepackage{braket}    % Palatino for text & math
+
+%----- PAGE LAYOUT -----
+\usepackage{geometry}
+\geometry{top=1in, bottom=1in, left=1in, right=1in}
+\usepackage{setspace}
+\onehalfspacing  % 1.5 line spacing
+
+%----- FANCY HEADERS & FOOTERS -----
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+% page number outside, header text inside
+\fancyhead[LE]{\small Georges Khater}
+\fancyhead[RE]{\small Notes on RH-coding}
+\fancyhead[LO]{\small \rightmark}
+\fancyhead[RO]{\small \leftmark}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% make sections feed into \leftmark/\rightmark
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}}
+\renewcommand{\subsectionmark}[1]{\markright{#1}}
+
+%----- SECTION NUMBERING & TOC DEPTH -----
+\setcounter{secnumdepth}{3}  % number down to \subsubsection
+\setcounter{tocdepth}{2}     % show ToC down to \subsection
+
+%----- AMS MATH & THEOREM STYLES -----
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{amsthm}
+
+% definitions, examples, remarks upright
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}[definition]{Example}
+\newtheorem{remark}[definition]{Remark}
+
+% theorems, lemmas, corollaries italic
+\theoremstyle{plain}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{corollary}[definition]{Corollary}
+
+% unnumbered proof environment
+\theoremstyle{remark}
+
+%----- OTHER PACKAGES -----
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{calc, matrix, decorations.pathreplacing, positioning}
+\usepackage{hyperref}
+\hypersetup{colorlinks,
+linkcolor=blue, citecolor=purple, urlcolor=teal}
+\usepackage{enumitem}
+\setlist[itemize]{nosep, left=1.5em}
+\usepackage{booktabs}
+\usepackage{listings}
+\lstset{
+basicstyle=\ttfamily\small,
+numbers=left,
+numbersep=5pt,
+frame=single,
+breaklines=true
+}
+\usepackage{xcolor}
+\definecolor{shade}{HTML}{F5F5F5}
+\usepackage{float}
+%----- CUSTOM MACROS -----
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\bsc}{\mathrm{BSC}}
+\newcommand{\dist}[2]{d\bigl(#1,#2\bigr)}
+\newcommand{\R}{\mathbb{R}}
+
+%----- TITLE METADATA -----
+\title{\LARGE\bfseries Algebraic Topology}
+\author{Georges Khater \\ \small American University of Beirut}
+\date{\today}
+
+%===============================================
+\begin{document}
+\maketitle
+\tableofcontents
+\bigskip
+
+\section{Topological Spaces} 
+
+\subsection{Basic Notions} 
+%--------- Topology ---------
+\begin{definition}[Topology]
+Let \(X\) be a set.  A {\it topology} \(\tau\) on \(X\) is a collection \(\tau\subseteq\mathcal P(X)\) such that:
+\begin{enumerate}
+  \item \(\emptyset\in\tau\) and \(X\in\tau\).
+  \item Any union of elements of \(\tau\) lies in \(\tau\).
+  \item Any finite intersection of elements of \(\tau\) lies in \(\tau\).
+\end{enumerate}
+\end{definition}
+
+\noindent\textbf{Example (\(\R\) with the usual metric).}
+Let \(d(x,y)=|x-y|\).  Then
+\[
+  \tau_d \;=\;\{\,U\subseteq\R : (\forall x\in U)\;\exists\varepsilon>0:\;(x-\varepsilon,x+\varepsilon)\subseteq U\}
+\]
+is a topology on \(\R\).
+
+%--------- Topological Space ---------
+\begin{definition}[Topological Space]
+A {\it topological space} is a pair \((X,\tau)\) where \(X\) is a set and \(\tau\) is a topology on \(X\).  Elements of \(\tau\) are called {\it open sets}.
+\end{definition}
+
+\noindent\textbf{Example.}
+\((\R,\tau_d)\) is a topological space.
+
+%--------- Basis ---------
+\begin{definition}[Basis]
+Let \((X,\mathcal O)\) be a topological space.  A subcollection \(\mathcal B \subseteq \mathcal O\) is called a \emph{basis} for the topology \(\mathcal O\) if for every \(U \in \mathcal O\) there exists a subfamily \(\mathcal B_U \subseteq \mathcal B\) such that
+\[
+  U \;=\; \bigcup_{B \in \mathcal B_U} B.
+\]
+\end{definition}
+
+\noindent\textbf{Example (Basis for \(\tau_d\)).}
+\[
+  \mathcal B \;=\;\{(a,b)\subset\R : a<b\}
+\]
+is a basis: every open set in \(\tau_d\) is a union of open intervals.
+
+%--------- Subbasis ---------
+\begin{definition}[Subbasis]
+Let \((X,\mathcal O)\) be a topological space.  A collection \(\mathcal S \subseteq \mathcal O\) is called a \emph{subbasis} for the topology \(\mathcal O\) if the family of all finite intersections of elements of \(\mathcal S\),
+\[
+  \bigl\{\,S_{1}\cap\cdots\cap S_{n} : n\ge1,\;S_{i}\in\mathcal S\bigr\},
+\]
+is a basis for \(\mathcal O\).
+\end{definition}
+
+\noindent\textbf{Example (Subbasis for \(\tau_d\)).}
+\[
+  \mathcal S
+  = \{\,(-\infty,b)\;:\;b\in\R\}\;\cup\;\{\, (a,\infty)\;:\;a\in\R\}.
+\]
+Finite intersections give \((a,b)\), and unions of those recover every open set.
+
+\begin{definition}[Continous map] 
+  A map $f \cdot X \to Y$ between topological spaces is \emph{continuous} if the pre-image $f^{-1}(V)$ of each open set $V$ of $Y$ is open in $X$. 
+  Dually: A map is continuous if the pre-image of each closed set is closed.   
+\end{definition}
+
+\noindent\textbf{Example $id(X)$} The identity $id(X) \colon X \to X$ is always continous. 
+
+%--------- Initial (Weak) Topology ---------
+\begin{definition}[Initial (Weak) Topology]
+Let \(X\) be a set and \(\{\,f_i:X\to Y_i\}_{i\in I}\) a family of maps into topological spaces \((Y_i,\tau_i)\).  
+The {\it initial topology} on \(X\) is the coarsest topology making every \(f_i\) continuous.  Equivalently, it is generated by the subbasis
+\[
+  \{\,f_i^{-1}(U) : i\in I,\;U\in\tau_i\}.
+\]
+\end{definition}
+
+\begin{definition}[Homeomorphism]
+  A \emph{homeomorphism} $f \colon X \to Y$ is a continuous map with a continuous inverse 
+  $g \colon Y \to X$. 
+
+  Spaces $X$ and $Y$ are \emph{homeomorphic} if there exists a homeomorphism between them. 
+\end{definition}
+
+\begin{definition}[Open and closed maps]
+  A map $f \colon X \to Y$ between spaces is \emph{open (closed)} if the image of each open (closed) set is again open (closed).
+\end{definition}
+
+We fix a topological space $X$ and a subset $A$. 
+\begin{definition}[Closure and Density]
+  The intersection of the closed sets which contains $A$ is denoted $\overline{A}$ 
+  and called \emph{closure} of $A$ in $X$. 
+
+  A set $A$ is \emph{dense} in $X$ if $\overline{A} = X$. 
+\end{definition}
+
+\begin{definition}[Interior and Boundary]
+  The \emph{interior} of $A$ is the union of the open sets contained in $A$. 
+
+  The \emph{boundary} of $A$ in $X$ is 
+  $$\operatorname{Bd}(A) = \overline{A} \cap \left(\overline{X \setminus A}\right)$$
+\end{definition}
+
+% ===== Neighbourhoods =====
+\begin{definition}[Open Neighbourhood]
+Let \((X,\tau)\) be a topological space and \(A\subseteq X\).  An \emph{open neighbourhood} of \(A\) is any open set \(U\in\tau\) with \(A\subseteq U\).
+\end{definition}
+
+\begin{definition}[Neighbourhood]
+A set \(B\subseteq X\) is a \emph{neighbourhood} of \(A\subseteq X\) if there exists an open neighbourhood \(U\in\tau\) of \(A\) such that \(U\subseteq B\).
+\end{definition}
+
+\begin{definition}[Neighbourhood Basis]
+A collection \(\mathcal N_x\) of neighbourhoods of a point \(x\in X\) is a \emph{neighbourhood basis} at \(x\) if for every neighbourhood \(B\) of \(x\) there is some \(N\in\mathcal N_x\) with \(N\subseteq B\).
+\end{definition}
+
+% ===== Continuity via Neighbourhoods =====
+\begin{definition}[Continuity at a Point]
+A map \(f\colon X\to Y\) between topological spaces is \emph{continuous at \(x\in X\)} if for every neighbourhood \(V\) of \(f(x)\) in \(Y\) there exists a neighbourhood \(U\) of \(x\) in \(X\) such that
+\[
+  f(U)\;\subseteq\;V.
+\]
+\end{definition}
+
+% ===== Comparing Topologies =====
+\begin{definition}[Finer and Coarser Topologies]
+Let \(\mathcal O_1,\mathcal O_2\) be two topologies on the same set \(X\).  We say \(\mathcal O_2\) is \emph{finer} than \(\mathcal O_1\) (and \(\mathcal O_1\) is \emph{coarser} than \(\mathcal O_2\)) if and only if the identity map
+\[
+  \mathrm{id}\colon (X,\mathcal O_2)\;\longrightarrow\;(X,\mathcal O_1)
+\]
+is continuous.
+\end{definition}
+
+% ===== Intersection of Topologies =====
+\begin{proposition}[Intersection of Topologies]
+If \(\{\mathcal O_j\}_{j\in J}\) is any family of topologies on \(X\), then
+\[
+  \bigcap_{j\in J}\mathcal O_j
+\]
+is itself a topology on \(X\).
+\end{proposition}
+
+% ===== Separation Axioms =====
+\begin{definition}[T\textsubscript{1} Space]
+A topological space \((X,\tau)\) is called a \emph{T\textsubscript{1} space} if every singleton \(\{x\}\subseteq X\) is closed.
+\end{definition}
+
+\begin{definition}[T\textsubscript{2} / Hausdorff Space]
+A space \((X,\tau)\) is \emph{T\textsubscript{2}} (or \emph{Hausdorff}) if for every pair of distinct points \(x,y\in X\) there exist disjoint open neighbourhoods \(U\ni x\) and \(V\ni y\) with \(U\cap V=\varnothing\).
+\end{definition}
+
+\begin{definition}[T\textsubscript{3} / Regular Space]
+\((X,\tau)\) is \emph{regular} if it is T\textsubscript{1} and whenever \(x\in X\) and \(A\subseteq X\) is closed with \(x\notin A\), there exist disjoint open sets \(U\ni x\) and \(V\supseteq A\) such that \(U\cap V=\varnothing\).
+\end{definition}
+
+\begin{definition}[T\textsubscript{4} / Normal Space]
+\((X,\tau)\) is \emph{normal} if it is T\textsubscript{1} and whenever \(A,B\subseteq X\) are disjoint closed sets, there exist disjoint open sets \(U\supseteq A\) and \(V\supseteq B\) with \(U\cap V=\varnothing\).
+\end{definition}
+
+\begin{definition}[Completely Regular Space]
+\((X,\tau)\) is \emph{completely regular} if it is Hausdorff (T\textsubscript{2}) and for every closed set \(A\subseteq X\) and point \(x\notin A\), there exists a continuous map \(f\colon X\to [0,1]\) with \(f(x)=1\) and \(f(A)=\{0\}\).
+\end{definition}
+
+% ===== Key Theorems =====
+\begin{theorem}[Urysohn Lemma]
+Let \(X\) be a normal (T\textsubscript{4}) space, and let \(A,B\subseteq X\) be disjoint closed sets.  Then there exists a continuous function
+\[
+  f\colon X\;\longrightarrow\;[0,1]
+  \quad\text{such that}\quad
+  f(A)=\{0\},\quad f(B)=\{1\}.
+\]
+\end{theorem}
+
+\begin{theorem}[Tietze Extension Theorem]
+Let \(X\) be a normal (T\textsubscript{4}) space and \(A\subseteq X\) a closed subset.  Then any continuous map
+\[
+  f\colon A \;\longrightarrow\;[0,1]
+\]
+admits a continuous extension
+\(\tilde f\colon X\to[0,1]\) with \(\tilde f|_A = f\).
+\end{theorem}
+
+% ===== First-Countable =====
+\begin{definition}[First-Countable]
+A topological space \((X,\tau)\) is said to be \emph{first-countable} if for each point \(x\in X\) there exists a countable collection of neighbourhoods 
+\[
+  \{\,U_{n}(x)\}_{n=1}^\infty
+\]
+such that for every neighbourhood \(V\) of \(x\), some \(U_n(x)\subseteq V\).  Equivalently, each point has a countable local basis.
+\end{definition}
+
+% ===== Key Points: Metrics ↔ Topology =====
+\begin{itemize}
+  \item \textbf{Metric induces a topology:}  
+    In a metric space \((X,d)\), the open balls 
+    \(\;U_\varepsilon(x)=\{\,y:d(x,y)<\varepsilon\}\)
+    form a basis for the topology \(\tau_d\).
+
+  \item \textbf{Metrizable spaces:}  
+    A space \((X,\tau)\) is \emph{metrizable} if \(\tau=\tau_d\) for some metric \(d\).  
+    Every metrizable space is first-countable (e.g.\ use the countable balls \(U_{1/n}(x)\)).
+
+  \item \textbf{Properties of Metric spaces:} Metric spaces respect all sepration properties $T_1, \cdots, T_4$. 
+\end{itemize}
+
+\begin{definition}[Directed Set]
+A \emph{directed set} is a pair \((I,\le)\) where \(\le\) is a reflexive, transitive relation on \(I\) such that
+\[
+  \forall\,i,j\in I\;\;\exists\,k\in I:\;i\le k\ \text{and}\ j\le k.
+\]
+\end{definition}
+
+\begin{definition}[Net]
+Let \((X,\tau)\) be a topological space and \((I,\le)\) a directed set.  A \emph{net} in \(X\) is a map
+\[
+  x_\bullet\colon I \;\longrightarrow\; X,
+  \quad i \mapsto x_i.
+\]
+\end{definition}
+
+\begin{definition}[Convergence of a Net]
+A net \((x_i)_S{i\in I}\) \emph{converges} to \(x\in X\), written \(x_i\to x\), if for every neighborhood \(U\ni x\) there exists \(i_0\in I\) such that
+\[
+  \forall\,i\ge i_0:\;x_i\in U.
+\]
+\end{definition}
+
+\begin{definition}[Accumulation (Cluster) Point]
+A point \(x\in X\) is an \emph{accumulation value} of the net \((x_i)_{i\in I}\) if for every neighborhood \(U\ni x\) and every \(i\in I\) there is \(j\ge i\) with
+\[
+  x_j\in U.
+\]
+Equivalently, \(x\) is the limit of some subnet of \((x_i)\).
+\end{definition}
+
+\begin{definition}[Final Map and Subnet]
+Let \((I,\le_I)\) and \((J,\le_J)\) be directed sets.  A map \(h\colon I\to J\) is called \emph{final} if
+\[
+  \forall\,j\in J\;\;\exists\,i\in I:\;h(i)\ge_J j.
+\]
+Given a net \((x_j)_{j\in J}\), the composition \((x_{h(i)})_{i\in I}\) is called a \emph{subnet} of \((x_j)\).
+\end{definition}
+
+\begin{remark}
+\begin{itemize}
+  \item Every subnet of a convergent net converges to the same limit.
+  \item Every accumulation value of a net is the limit of some subnet.
+  \item Nets generalize sequences and allow characterization of continuity, compactness, and closure in arbitrary topological spaces.
+\end{itemize}
+
+\end{document}
