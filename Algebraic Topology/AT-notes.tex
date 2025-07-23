@@ -361,4 +361,93 @@ Given a net \((x_j)_{j\in J}\), the composition \((x_{h(i)})_{i\in I}\) is calle
   \end{align*}
 \end{enumerate}
 
+\subsection{Subspaces, Quotient Spaces} 
+
+% ===== Subspace & Embeddings =====
+\begin{definition}[Subspace (Induced) Topology]
+Let \((X,\tau)\) be a topological space and \(A\subseteq X\).  The \emph{subspace topology} (or \emph{induced} or \emph{relative topology}) on \(A\) is
+\[
+  \tau|_A \;=\;\{\,U\subseteq A : \exists\,V\in\tau,\;U = A\cap V\}.
+\]
+The space \((A,\tau|_A)\) is called a \emph{subspace} of \(X\).
+\end{definition}
+
+\begin{definition}[Embedding]
+A continuous map \(f\colon (Y,\sigma)\to (X,\tau)\) is an \emph{embedding} if \(f\) is injective and the induced map 
+\[
+  f\colon Y \;\xrightarrow{\cong}\; f(Y)
+\]
+is a homeomorphism onto its image \(f(Y)\) equipped with the subspace topology \(\tau|_{f(Y)}\).
+\end{definition}
+
+\begin{proposition}[Universal Property of an Embedding]
+Let \(i\colon Y\to X\) be an injective set map between topological spaces.  The following are equivalent:
+\begin{enumerate}
+  \item \(i\) is an embedding.
+  \item For every topological space \(Z\) and every set map \(g\colon Z\to Y\), \(g\) is continuous if and only if the composition \(i\circ g\colon Z\to X\) is continuous.
+\end{enumerate}
+\end{proposition}
+
+\begin{remark}
+\begin{itemize}
+  \item The inclusion map \(i\colon A\hookrightarrow X\) of a subspace \(A\subseteq X\) is always continuous.
+  \item If \(A\subset B\subset X\) with \(A\) closed in \(B\) and \(B\) closed in \(X\), then \(A\) is closed in \(X\).  Similarly for open subspaces.
+  \item An open (or closed) subset of a subspace \(B\subseteq X\) need not be open (or closed) in \(X\).
+\end{itemize}
+\end{remark}
+
+% ===== Retracts & Sections =====
+\begin{definition}[Retract]
+Let \((X,\tau)\) be a topological space and \(A\subseteq X\).  A continuous map
+\[
+  r\colon X\;\longrightarrow\;A
+\]
+is called a \emph{retraction} if \(r|_{A} = \mathrm{id}_A\).  In this case \(A\) is called a \emph{retract} of \(X\).
+\end{definition}
+
+\begin{definition}[Section]
+Let \(p\colon E\to B\) be a continuous surjection.  A continuous map
+\[
+  s\colon B\;\longrightarrow\;E
+\]
+is called a \emph{section} of \(p\) if \(p\circ s = \mathrm{id}_B\).  Equivalently, \(s\) is an embedding of \(B\) into \(E\).
+\end{definition}
+
+% ===== Quotient Topology =====
+\begin{definition}[Quotient Topology]
+Let \(f\colon X\to Y\) be a surjective map of spaces.  The \emph{quotient topology} on \(Y\) is
+\[
+  \tau_Y \;=\;\{\,U\subseteq Y : f^{-1}(U)\in\tau_X\}.
+\]
+Then \(f\) is continuous by construction.  If moreover
+\[
+  U\subseteq Y\quad\Longleftrightarrow\quad f^{-1}(U)\text{ is open in }X,
+\]
+we call \(f\) a \emph{quotient map} or \emph{identification map}, and \(Y\) a \emph{quotient space} of \(X\).
+\end{definition}
+
+\begin{definition}[Saturated Subset]
+Given a surjection \(f\colon X\to Y\), a subset \(A\subseteq X\) is called \emph{saturated} (with respect to \(f\)) if it is a union of fibres of \(f\), i.e.\ \(A = f^{-1}(f(A))\).
+\end{definition}
+
+\begin{definition}[Quotient by an Equivalence Relation]
+If \(\sim\) is an equivalence relation on \(X\), the set of equivalence classes \(X/\!\sim\) is given the quotient topology via the canonical projection
+\[
+  p\colon X\;\longrightarrow\;X/\!\sim,\quad p(x)=[x].
+\]
+\end{definition}
+
+\begin{definition}[Collapsing a Subset]
+For \(A\subseteq X\), the space \(X/A\) denotes the quotient obtained by identifying all of \(A\) to a single point (and leaving other points distinct), equipped with the quotient topology of the projection \(X\to X/A\).
+\end{definition}
+
+\begin{proposition}[Universal Property of Quotient Maps]
+Let \(f\colon X\to Y\) be a surjective map of topological spaces.  Then \(f\) is a quotient map if and only if for every topological space \(Z\) and every map \(g\colon Y\to Z\),
+\[
+  g\text{ is continuous}
+  \quad\Longleftrightarrow\quad
+  g\circ f\colon X\to Z\text{ is continuous.}
+\]
+\end{proposition}
+
 \end{document}
