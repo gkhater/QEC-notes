@@ -450,4 +450,47 @@ Let \(f\colon X\to Y\) be a surjective map of topological spaces.  Then \(f\) is
 \]
 \end{proposition}
 
+% ===== Adjunction (Pushout) Spaces =====
+\begin{definition}[Adjunction Space / Pushout]
+Let \(j\colon A\hookrightarrow X\) be the inclusion of a subspace and \(f\colon A\to Y\) a continuous map.  The \emph{adjunction space} or \emph{pushout} 
+\[
+  Z \;=\; Y\;\cup_{\,f}\;X
+\]
+is the quotient of the disjoint union \(X\sqcup Y\) by the relations
+\[
+  a\sim f(a),
+  \quad
+  \forall\,a\in A.
+\]
+It fits into the commutative square
+\[
+  \begin{tikzcd}
+    A \arrow[r, "f"] \arrow[d, hook, "j"'] & Y \arrow[d, hook, "J"] \\
+    X \arrow[r, "F"'] & Z
+  \end{tikzcd}
+\]
+which is a pushout in \(\mathbf{Top}\).
+\end{definition}
+
+\begin{proposition}
+Let \(j\colon A\hookrightarrow X\) be a \emph{closed embedding} and form the adjunction \(Z=Y\cup_f X\).  Then:
+\begin{enumerate}
+  \item \(J\colon Y\to Z\) is a closed embedding.
+  \item \(F\colon X\setminus A \to Z\) is an open embedding.
+  \item If \(X,Y\) are \(T_1\) (resp.\ \(T_4\)), then \(Z\) is \(T_1\) (resp.\ \(T_4\)).
+  \item If \(f\) is a quotient map, then \(F\) is a quotient map.
+\end{enumerate}
+\end{proposition}
+
+\begin{proposition}
+The adjunction \(Z=Y\cup_f X\) is Hausdorff provided that:
+\[
+  Y \text{ is Hausdorff}, 
+  \quad
+  X \text{ is regular}, 
+  \quad
+  A \text{ is a retract of an open neighbourhood in }X.
+\]
+\end{proposition}
+
 \end{document}
