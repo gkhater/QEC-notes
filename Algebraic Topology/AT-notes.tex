@@ -462,14 +462,10 @@ is the quotient of the disjoint union \(X\sqcup Y\) by the relations
   \quad
   \forall\,a\in A.
 \]
-It fits into the commutative square
-\[
-  \begin{tikzcd}
-    A \arrow[r, "f"] \arrow[d, hook, "j"'] & Y \arrow[d, hook, "J"] \\
-    X \arrow[r, "F"'] & Z
-  \end{tikzcd}
-\]
-which is a pushout in \(\mathbf{Top}\).
+and 
+$$x \sim x \quad \forall \, x \in X \setminus A, \quad y \sim y \quad \forall\, y \in Y \setminus f(A)$$
+This also gives us a canonical $F \colon X \to Z$ define by 
+$$F(x) = [x]$$
 \end{definition}
 
 \begin{proposition}
