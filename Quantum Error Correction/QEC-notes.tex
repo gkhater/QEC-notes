@@ -531,7 +531,7 @@ If $\ket{x + C_2}$ was the original state then the corrupted state is
 $$\frac{1}{\sqrt{|C_2|}} \sum_{y \in C_2} (-1)^{(x + y) \cdot e_2} \ket{x + y + e_1}$$
 To detect bit flips, it is convenient to introduce an ancilla containing sufficient qubits to store the syndrome for $C_1$, and initially the 
 $\ket{0}$ state. We use reversible computation (CNOTS) to apply the parity matrix $H_1$ of $C_1$ taking 
-$$\ket{x + y + e_1} \ket{0} \to \ket{x + y + 1} \ket{H_1 (x + y + e_1)} = \ket{x + y + e} \ket{H_1 e_1}$$
+$$\ket{x + y + e_1} \ket{0} \to \ket{x + y + e_1} \ket{H_1 (x + y + e_1)} = \ket{x + y + e_1} \ket{H_1 e_1}$$
 Therefore the effect of this operation is to produce the state: 
 $$\frac{1}{\sqrt{|C_2|}} \sum_{y \in C_2} (-1)^{(x+y) \cdot e_2} \ket{x + y + e_1} \ket{H_1 e_1}$$
 Error-detection for the bit flip errors is completed by measuring the anscilla to obtain $H_1 e_1$ and discarding the ancilla, giving the state 
