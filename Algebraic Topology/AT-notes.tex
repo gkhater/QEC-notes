@@ -290,6 +290,11 @@ A topological space \((X,\tau)\) is said to be \emph{first-countable} if for eac
 such that for every neighbourhood \(V\) of \(x\), some \(U_n(x)\subseteq V\).  Equivalently, each point has a countable local basis.
 \end{definition}
 
+\begin{definition}
+  A toplogical space $(X, \tau)$ is said to be \emph{second-countable} if there exists a countable 
+  basis for its topology
+\end{definition}
+
 % ===== Key Points: Metrics ↔ Topology =====
 \begin{itemize}
   \item \textbf{Metric induces a topology:}  
@@ -594,6 +599,72 @@ carries a topology such that the subspace topologies of $X_i \cap X_j$ in $X_i$ 
 and these subspaces are closed. Then there is a unique topology on $X$ which induces on $X_j$ the given topology. 
 The space $X$ has the colimit topology with respect to the $X_j$.
 
+\subsection{Topological Manifolds} 
+\begin{definition}
+  A space $M$ is \emph{locally Euclidian of dimension $n$} if every point $x \in M$ has a neighborhood 
+  homeomorphic to an open ball $\mathbb{B}^n \subseteq \mathbb{R}^n$.  \\
+  (Note that $\mathbb{B}^n \cong \mathbb{R}^n$)
+\end{definition}
+
+\begin{definition}
+  An \emph{$n$-dimensional toplogical maniforld} is a second countable Hausdorff space that is locally Euclidian of 
+  dimension $n$. 
+\end{definition}
+
+\begin{proposition}
+  If $m \neq n$, a nonempty space cannot be both an $m$-manifold and an $n$-manifold. 
+\end{proposition}
+
+\paragraph{Charts and Atlases for Manifolds} 
+\begin{definition}
+  A \emph{coordinate domain} (or \emph{chart domain}) on an $n$-manifold $M$ is an open set
+  $U \subseteq M$ together with a homeomorphism
+  \[
+    \varphi \colon U \;\xrightarrow{\;\cong\;}\; V,
+  \]
+  where $V$ is an open subset of $\mathbb{R}^n$.
+\end{definition}
+
+\begin{definition}
+  A \emph{coordinate map} (or \emph{chart map}) on $M$ is the pair
+  \[
+    (U,\varphi),
+  \]
+  where $U\subseteq M$ is a coordinate domain and
+  $\varphi \colon U \to V \subseteq \mathbb{R}^n$ is the corresponding homeomorphism.
+\end{definition}
+
+\begin{definition}
+  An \emph{atlas} on $M$ is a collection of coordinate maps
+  \[
+    \{(U_i,\varphi_i)\}_{i\in I}
+  \]
+  such that
+  \begin{enumerate}
+    \item $\displaystyle \bigcup_{i\in I} U_i = M$, and
+    \item for any overlap $U_i \cap U_j \neq \emptyset$, the transition map
+      \[
+        \varphi_j \circ \varphi_i^{-1} \;\colon\; \varphi_i(U_i \cap U_j)\;\longrightarrow\;\varphi_j(U_i \cap U_j)
+      \]
+      is a homeomorphism between open subsets of $\mathbb{R}^n$.
+  \end{enumerate}
+\end{definition}
+
+\paragraph{Toplogical Manifolds with Boundary} 
+
+\begin{definition}
+  The \emph{Upper half-space} $\mathbb{H}^n \subseteq \mathbb{R}^n$ is 
+  $$\mathbb{H} := \{(x_1, \cdots, x_n) \in \mathbb{R}^n \mid x_n \geq 0\}$$
+\end{definition}
+
+\begin{definition}
+  An \emph{$n$-dimensional manifold with boundary} is a second countable Hausdorff space in which 
+  every point has a neighborhood homeomorphic to an open subset of $\mathbb{R}^n$ or $\mathbb{H}^n$. 
+\end{definition}
+
+\begin{proposition}
+  No point of a topological manifold with boundary is both a boundary point and an interior point of the manifold.
+\end{proposition}
 
 \section{References} 
 \begin{quote}
