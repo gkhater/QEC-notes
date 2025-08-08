@@ -779,6 +779,99 @@ If $X$ and $Y$ are locally compact, $X \times Y$ is locally compact.
     \item A locally closed set $A$ in a locally compact space is locally compact. 
   \end{enumerate}
 \end{proposition}
+
+\subsection{Connectedness and Path-Connectedness}
+\paragraph{Path-Connectedness}
+\begin{definition}
+  A \emph{path} in a topological space $X$ from $x$ to $y$ is a continuous map $u \colon [a,b] \to X$ 
+  such that $u(a) = x$ and $u(b) = y$. We say that the path connects the point $u(a)$ and $u(b)$.
+  
+  We can reparametrize and use the unit interval as a source $[0,1] \to X$, $t \to u\left((1-t)a + t b\right)$.
+  In general, we mostly use the unit interval. 
+\end{definition}
+
+\begin{definition}
+  If $u \colon [0,1] \to X$ is a path from $x$ to $y$, then the \emph{inverse path} 
+  $u^{-} \colon t \to w(1-t)$ is a path from $y$ to $X$. 
+\end{definition}
+
+\begin{definition}
+  If $v \colon [0,1] \to X$ is another path from $y$ to $z$, then the \emph{product path} $u * v$, defined by 
+  $$\begin{cases}
+    u(2t) \quad &t \leq 1/2 \\
+    v(2t - 1) \quad &t \geq 1/2
+  \end{cases}$$
+  is a pagh from $x$ to $x$. 
+\end{definition}
+
+\begin{definition}
+  We also define the constant path $k_x$ with constant value $x$.
+\end{definition}
+
+Notice that being connectible by paths is an equivalence relation on $X$. An equivalence class is 
+called a \emph{path component} of $X$. We denote by $\pi_0(X)$ the set of path components, and by $[x]$ the 
+path component of the point $x$. Note that a continuous map $f \colon X \to Y$ induces a function 
+$$\pi_0(f) \colon \pi_0(X) \to \pi_0(Y), \, [x] \to [f(x)]$$
+
+\begin{definition}[Path-connected]
+  A space is said to be \emph{path-connected} or \emph{0-connected} if it has one of the following equivalent properties: 
+  \begin{enumerate}
+    \item $\pi_0(X)$ consists of a single element. 
+    \item Any two points can be joined by a path. 
+    \item Any continuous map $f \colon \: \partial I = \{0,1\} \to X$ has a continuous extension 
+    $F \colon I \to X$. \\
+    (Where $\partial I$ represents the boundary of the set $I$)
+  \end{enumerate}
+\end{definition}
+
+\paragraph{Connectedness}
+\begin{definition}
+  A space is \emph{connected} if it is not the topological sum of two non-empty subspaces.
+
+  Thus $X$ is \emph{disconnected} if and only if $X$ Contains a subset $X$ which is open, closed and different 
+  from $\emptyset$ and $X$. 
+\end{definition}
+
+\begin{definition}
+  A \emph{Decomposition} of $X$ is a pair $U,V$ of open, non-empty, disjoint subsets with union $X$. 
+\end{definition}
+
+\begin{proposition}
+  A space $X$ is disconnected if and only if there exists a continuous surjective map $f \colon X \to \{0,1\}$; a decomposition 
+  is given by $U = f^{-1}(0), \, V = f^{-1}(1)$. 
+
+  The continuous image of a connected space is connected. (In $\mathbb{R}$, 
+  $A$ is connected iff $A$ is an interval). 
+\end{proposition}
+
+\begin{proposition}
+  Let $(A_j)_{j \in J}$ be a family of connected subsets of $X$ such taht $A_i \cap A_j \neq \emptyset \quad \forall i, j \in J$. 
+  Then $\bigcup_{j} A_j = Y$ is connected.
+
+  Let $A$ be connected, and $A \subset B \subset \overline{A}$, then $B$ is connected. 
+\end{proposition}
+
+\begin{definition}[Component of $x$]
+  The union of the connected sets in $X$ which contain $x$ is thus a closed connected subset. 
+  We define this union to be the \emph{component of $x$} denoted $X(x)$. 
+
+  Note that if $y \in X(x)$, then $X(y) = X(x)$. Moreover, the component of $X$ is a maximal connected subsets. Any space is 
+  the disjoint union of its component. 
+\end{definition}
+
+\begin{definition}
+  A space is said to be \emph{totally disconnected} if its components consists of single points.
+\end{definition}
+
+Since intervals are connected a path connected space is connected. Moreover a product $\prod_j X_j$ 
+is connected if each $X_j$ is connected, the component of $(x_j)_j$ is the product of the 
+components of the $x_j$. 
+
+\begin{proposition}
+  If $X$ is locally-path connected, then its connected components and its path-connected components coincide, 
+  and each component is open. 
+\end{proposition}
+
 \section{References} 
 \begin{quote}
 \textbf{Tammo Dieck's} Book \emph{Algebraic Topology} 
