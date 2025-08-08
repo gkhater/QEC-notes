@@ -666,6 +666,119 @@ The space $X$ has the colimit topology with respect to the $X_j$.
   No point of a topological manifold with boundary is both a boundary point and an interior point of the manifold.
 \end{proposition}
 
+\subsection{Compact Spaces}
+\begin{definition}
+  A family $A = (A_j \mid j \in J)$ of subsets of $X$ is a \emph{covering} of $X$ if $X$ is the union of the 
+  $A_j$. 
+
+  A covering $B = (B_k)$ of $X$ is a \emph{refinement} of $A$ if for each $k \in K$ there exists $j \in J$ such that $B_k \subset A_j$.
+
+  A covering is said to be open (closed) if each of the $A_j$s is open (closed). 
+\end{definition}
+
+\begin{definition}
+  A covering $B = (B_k)_{k \in K}$ is a \emph{subcovering} of $A = (A_j)_{j \in J}$ if $K \subset J$ and $B_k = A_k$ for all $k \in K$. We say that 
+  $B$ is \emph{finite} or \emph{countable} if $K$ is finite or countable. 
+
+  A covering $A$ is \emph{locally finite} if each $x \in X$ has a neighborhood $U$ such that $U \cap A_j \neq \emptyset$ only for 
+  a finite number of $j \in J$. It is called \emph{point-finite} if each $x \in X$ is contained only in a finite number of $A_j$. 
+\end{definition}
+
+\begin{definition}[Compact space]
+  A space $X$ is \emph{compact} if every open covering has a finite subcovering. 
+  Note that equivalently, every family of closed sets with empty intersection has a finite 
+  subfamily of sets with empty intersection ($X$ is compact if and only if every collection of closed sets with the finite-intersection property has 
+  a nonempty total intersection). 
+\end{definition}
+
+\begin{definition}
+  A set $A$ in a space $X$ is \emph{relatively compact} if its closure is compact.
+\end{definition}
+
+\begin{proposition}
+  \begin{itemize}
+    \item A space $X$ is compact if and only each net in $X$ has a convergent subnet. 
+    \item A discrete closed set in a compact space is finite. 
+    \item Let $X$ be compact, $ A \subset X$ closed and $f \colon X \to Y$ continuous; therefore $A$ and $F(X)$ are 
+    compact. 
+  \end{itemize}
+\end{proposition}
+
+\begin{proposition}
+  Let $B, C$ be compacts subsets of $X, Y$ respectively. Let $\mathcal{U}$ be a family of open subsets of 
+  $X \times Y$ which cover $B \times C$. Then there exist open neighborhoods $U$ of $B$ and $V$ of $C$ such that $U \times V$ is covered by a finite 
+  subfamily of $\mathcal{U}$. In particular, the product of two compact spaces is compact.
+
+  Moreover, an arbitrary product of compact spaces is compact.
+\end{proposition}
+
+\begin{proposition}
+  Let $B$ and $C$ be disjoint compact subsets of a Hausdorff space $X$. Then $B$ and $C$ has disjoint open neighborhoods. A compact Hausdorff space is normal. 
+  A compact subset $C$ of a Hausdorff space $X$ is closed.   
+\end{proposition}
+
+\begin{proposition}
+  A continuous map $f \colon X \to Y$ from a compact space into a Hausdorff space is closed.
+  If, moreover, $f$ is injective (bijective), then $f$ is a homeomorphism. If $f$ is surjective, then $f$ is a quotient map. 
+\end{proposition}
+
+\begin{proposition}
+  Let $X$ be a compact Hausdorff space and $f \colon X \to Y$ a quotient map. The following assertions are equivalent: 
+  \begin{enumerate}
+    \item $Y$ is Hausdorff
+    \item $f$ is closed 
+    \item $R = \{(x_1, x_2) \mid f(x_1) = f(x_2)\}$ is closed in $X \times X$. 
+  \end{enumerate}
+\end{proposition}
+
+\begin{definition}
+  A space if called \emph{locally compact} if each neighborhood of a point $x$ contains a 
+  compact neighborhood. An open subset of a locally compact space is again locally compact. 
+\end{definition}
+
+Let $X$ be Hausdorff and assume that each point has a compact neighborhood. Let $U$ be a 
+neighborhood of $x$ and $K$ a compact neighborhood. Since $K$ is normal, $K \cap U$ contains a closed neighborhood $L$ of $x$ 
+in $K$. Therefore $X$ is locally compact, in particular a compact Hausdorff space is locally compact. 
+If $X$ and $Y$ are locally compact, $X \times Y$ is locally compact. 
+
+\begin{definition}
+  Let $X$ be a topological space. An embedding $f \colon X \to Y$ is a \emph{compactification} of $X$ 
+  if $Y$ is compact and $f(X)$ dense in $Y$. 
+
+  In a general compactification $f \colon X \to Y$, one calls the points in $Y \setminus f(X)$ the points at infinity. 
+\end{definition}
+
+\begin{theorem}[one-point compactification]
+  Let $X$ be a locally compat Hausdorff space. Up to homeomorphism, there exists 
+  a unique compactification $f \colon X \to Y$ by a compact Hausdorff space such 
+  that $Y \setminus f(X)$ consists of a single point. 
+\end{theorem}
+
+\begin{proposition}
+  Let $K$ be a locally compact space such that $K$ is a union of compact subsets $(K_i)_{i \in \mathbb{N}}$. 
+  Then there exists a sequence $(U_i)_{i \in \mathbb{N}}$ of open subsets with union $K$ such that 
+  each $\overline{U}_i$ is compact and contained in $U_{i+1}$.  
+\end{proposition}
+
+\begin{theorem}
+  Let the locally compact Hausdorff space $M \neq \emptyset$ be a union of closed subsets $M_n, n \in \mathbb{N}$. Then at least one 
+  of the $M_n$ contains an interior point. 
+\end{theorem}
+
+\begin{definition}
+  A subset $H$ of a space $G$ is called \emph{locally closed}, if each $x \in H$ has a neighborhood $V_x$ in $G$ 
+  such that $H \cap V_x$ is closed in $G$. 
+\end{definition}
+
+\begin{proposition}
+  \begin{enumerate}
+    \item Let $A$ be locally closed in $X$. Then $A = U \cap C$ with $U$ open and $C$ closed. Conversely, if $X$ is regular, 
+    then an intersection $U \cap C$, $U$ open $C$ closed, is locally closed. 
+
+    \item A locally compact set in a Hausdorff space $X$ is locally closed. 
+    \item A locally closed set $A$ in a locally compact space is locally compact. 
+  \end{enumerate}
+\end{proposition}
 \section{References} 
 \begin{quote}
 \textbf{Tammo Dieck's} Book \emph{Algebraic Topology} 
