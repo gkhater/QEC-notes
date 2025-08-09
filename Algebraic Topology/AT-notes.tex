@@ -530,15 +530,15 @@ $$(x_j) \to (f_j(x_j))$$
 \end{proposition}
 
 Let $(X_j)$ be a family of non-empty pairwise disjoint spaces. The set 
-$$\mathcal{O} = \{U \subset \amalg X_j \mid U \cap X_j \subset X_j \text{ open for all } j\}$$
-is a toplogy on the disjoint union $\amalg X_j$. A sum of two spaces is denoted $X_1 + X_2$. 
+$$\mathcal{O} = \{U \subset \sqcup X_j \mid U \cap X_j \subset X_j \text{ open for all } j\}$$
+is a toplogy on the disjoint union $\sqcup X_j$. A sum of two spaces is denoted $X_1 + X_2$. 
 
 \begin{proposition}
   \begin{itemize}
-    \item The subspace topology of $X_j$ in $\amalg X_j$ is the original toplogy. 
+    \item The subspace topology of $X_j$ in $\sqcup X_j$ is the original toplogy. 
     \item Let $X$ be the union of the familiy $(X_j)$ of pairwise disjoin subsets, Then $X$ is the 
     toplogical sum of the subspaces $X_j$ iff the $X_j$s are open. 
-    \item $f \colon \amalg X_j \to Y$ is continous if and only if each $f_{\mid X_j} \colon X_j \to Y$ is continous. 
+    \item $f \colon \sqcup X_j \to Y$ is continous if and only if each $f_{\mid X_j} \colon X_j \to Y$ is continous. 
   \end{itemize}
 \end{proposition}
 
@@ -557,13 +557,13 @@ is a toplogy on the disjoint union $\amalg X_j$. A sum of two spaces is denoted 
   Note that this forces $g_i^j$ and $g_j^i$ to be inverses. 
 \end{definition}
 
-Given a clutching datum, we get an equivalence relation on the disjoint sum $\amalg_{j \in J} U_j$: 
+Given a clutching datum, we get an equivalence relation on the disjoint sum $\sqcup_{j \in J} U_j$: 
 $$x \in U_i \sim y \in U_j \iff x \in U_i^j \land g_i^j(x) = y$$
 Let $X$ be the set of equivalence classes, and let $h_i \colon U_i \to X$ be the map which sends 
 $x \in U_i$ to its class. Clearly $h_i$ is injective, set $U(i) = Im(h_i)$, then 
 $$U(i) \cap U(j) = h_i(U_i^j)$$
 
-Conversely, assume that $X$ is a quotient of $\amalg_{j \in J} U_j$ such that each $h_i \colon U_i \to X$ 
+Conversely, assume that $X$ is a quotient of $\sqcup_{j \in J} U_j$ such that each $h_i \colon U_i \to X$ 
 is injective with image $U(i)$. Let $U_i^j = h_i^{-1} \left(U(i) \cap U(j)\right)$ and 
 and $g_i^j = h_j^{-1} \circ h_i \colon U_i^j \to U_j^i$. Then the $(U_i, U_i^j, g_i^j)$ are a clutching datum. 
 
@@ -571,7 +571,7 @@ and $g_i^j = h_j^{-1} \circ h_i \colon U_i^j \to U_j^i$. Then the $(U_i, U_i^j, 
   Let $(U_i, U_i^j, g_i^j)$ be a clutching datum. Assume that the $U_i$ are topological spaces, 
   $U_i^j \subset U_i$ open subsets, and the $g_i^j \colon U_i^j \to U_j^i$ homeomorphisms. Let $X$ carry 
   the quotient toplogy with respect to the quotient map 
-  $$p \colon \amalg_{i \in J} U_j \to X$$
+  $$p \colon \sqcup_{i \in J} U_j \to X$$
   Therefore: 
   \begin{itemize}
     \item The map $h_i$ is a homeomorphism onto an open subset of $X$ and $p$ is open. 
@@ -587,7 +587,7 @@ and $g_i^j = h_j^{-1} \circ h_i \colon U_i^j \to U_j^i$. Then the $(U_i, U_i^j, 
   Suppose a space $X$ is the (not necessarily disjoint) union of subspaces $(X_j)$. We say $X$ carries the 
   \emph{colimit topology} with respect to this family if one of the equivalent statements hold: 
   \begin{itemize}
-    \item The canonical map $\amalg_{j \in J} X_j \to X$ (inclusion on each summand) is a quotient map. 
+    \item The canonical map $\sqcup_{j \in J} X_j \to X$ (inclusion on each summand) is a quotient map. 
     \item $C$ is closed in $X$ iff $X_j \cap C$ is closed in $X_j$ for each $j$. 
     \item A set map $f \colon X \to Z$ into a space $Z$ is continuous if and only if the restrictions 
     $f_{\mid X_j} \colon X_j \to Z$ are continous. 
@@ -872,6 +872,61 @@ components of the $x_j$.
   and each component is open. 
 \end{proposition}
 
+\section{Cell Complexes} 
+
+\begin{definition}
+  An \emph{n-cell} is a space that is homeomorphic to an open $n$-dimensional ball.
+\end{definition}
+
+An orientable surface $M_g$ of genus $g$ an be constructed from a polygon with $4g$ sides by 
+identifying pairs of edges. The $4g$ edges of the polygon become a union of $2g$ circles in the surface, all 
+intersecting in a single point. But notice that this surface can be constructed in stages: Start with a single point, 
+Attach two $1$-cells to this point, then attach a $2$-cell. 
+
+More specifically these complexes can be built by the following steps: 
+\begin{itemize}
+  \item $0$-skeleton $X^0$: Discrete point(s)
+  \item $1$-skeleton $X^1$: add $D^1$ (Line(s))\\
+  For each $D^1$ we have an attaching map 
+  $$\varphi \colon \: S^0 = \partial D^1 \to X^0$$
+  \item $2$-skeleton $X^2$: add $D^2$ (Disk(s)) \\
+  According to an attaching map 
+  $$\varphi \colon \; S^1 = \partial D^2 \to X^1$$
+  \item $n$-skeleton $X^n$: add $D^n$ via maps 
+  $$\varphi \colon \: S^{n-1} = \partial D^n \to X^{n-1}$$
+\end{itemize}
+
+We can generalize by constructing a space by the following procedure:
+\begin{itemize}
+  \item Start with a discrete set $X^0$, whose points are regarded as $0$-cells. 
+  \item Given $X^{n-1}$, choose a family of attaching maps
+  $$\varphi_\alpha \colon \: S^{n-1} \to X^{n-1} \quad \alpha \in A_n$$
+  Form the quotient 
+  $$X^n = \left(X^{n-1} \sqcup \bigsqcup_{\alpha \in A_n} D_\alpha^n\right) \big/ \left\{x \in \partial D_\alpha^n \sim \varphi_\alpha(x)\right\}$$
+
+  \item One can either stop the process at a finite stage, setting $X = X^n$ for some $n < \infty$, or one can continue indefinitely, setting 
+  $$X = \bigcup_n X^n$$
+  In the latter case, $X$ is given the weak topology: $A \subset X$ is open iff $A \cap X^n$ is open (in $X^n$) for each $n$.
+\end{itemize}
+
+\begin{definition}
+  A space $X$ constructed by the above procedure is called a \emph{cell complex} or \emph{CW-complex} (Closure finite, Weak).
+\end{definition}
+
+\begin{definition}
+  If $X = X^n$ for some $n$, then $X$ is said to be finite-dimensional, and the smallest such $n$ is the \emph{dimension} of $X$, the maximum 
+  dimension of cells of $X$.
+\end{definition}
+
+\subsection{Real projective spaces} 
+
+\begin{definition}
+  The \emph{Real projective n-space $\mathbb{R}P^n$} is the space of all lines through the origin in $R^{n+1}$
+\end{definition}
+
+Notice that $\mathbb{R}P^n = \mathbb{RP^{n-1}} + D^n = D^0, D^1, D^2, \cdots D^n$. 
+
+
 \section{References} 
 \begin{quote}
 \textbf{Tammo Dieck's} Book \emph{Algebraic Topology} 
@@ -879,5 +934,7 @@ components of the $x_j$.
 \textbf{Allen Hatcher's} Book \emph{Algebraic Topology} 
 
 \textbf{Martin Furter's} Playlist \emph{Topology} 
+
+\textbf{Math at Andrews University} Playlist \emph{Algebraic topology}
 \end{quote}
 \end{document}
