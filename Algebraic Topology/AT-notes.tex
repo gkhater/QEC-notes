@@ -1005,6 +1005,80 @@ called \emph{singluar homology groups}, turn out to be much smaller (for reasonn
 the singular homology groups are the same as the homology groups. This approach allows us to solve the problem 
 of defining the boundary maps for cellular chains. 
 
+\subsection{Simplical and Singular Homology} 
+
+\paragraph{$\Delta$-Complexes} The torus, the projective plane, and the Klein bottle 
+can each be obtained from a square by identifying opposite edges. 
+Cutting a square along a diagonal produces two triangles, so each of these surfaces can also be built from two 
+triangles by identifying their edges in pairs. Similarly, we decompose any polygon into triangles, 
+in fact: all closed surfaces can be constructed from triangles by identifying edges. 
+
+\begin{definition}
+  The idea of a $\Delta$-complex is to generalize constructions like these to any number of dimensions. The $n$-dimensional 
+  analogue of the triange is the \emph{$n$-simplex}: \\
+  This is the smallest convex set in a Euclidian space $\mathbb{R}^m$ containing $n+1$ points $v_0, \cdots, v_n$ 
+  that do not lie in a hyperplane of dimension less than $n$.
+
+  Equivalently, we say that the difference vectors $v_1 - v_0, \cdots, v_n - v_0$ are L.I.
+  The $v_i$ are the \emph{vertices} of the simplex, and the simplex itself is denoted $[v_0, \cdots, v_n]$. 
+  Note that the odrering of the vertices is important here, since it gives an orientation ot the edges $[v_i, v_j]$ according 
+  to increasing subscribt. 
+\end{definition}
+
+For example, the standard $n$-simplex is 
+$$ \Delta^n = \{(t_0, \cdots, t_n) \in \mathbb{R}^{n+1} \mid \sum_i t_i = 1 \text{ and } t_i \geq 0 \ \forall i\}$$
+whose vertices are the unit vectors along the coordinate axes. 
+
+Notice that the ordering of the vertices determines a lienar homeomorphism from the standard $n$-simplex 
+$\Delta^n$ to any other $n$-simplex $[v_0, \cdots, v_n]$ preserving the order of the vertices, namely 
+$$(t_0, \cdots, t_n) \tp \sum_i t_i v_i$$
+
+\begin{definition}
+  If we delete one of the $n+1$ vertices of an $n$-simplex $[v_0, \cdots, v_n]$, then the remaining 
+  $n$-vertices span an $(n-1)$-simplex, called a \emph{face} $[v_0, \cdots, v_n]$. 
+\end{definition}
+
+\begin{definition}
+  THe \emph{boundary} of $\Delta^n$ is the union of all faces of $\Delta^n$, written $\partial \Delta^n$. 
+  The open simplex $\mathring{\Delta}^n$ is $\Delta^n - \partial \Delta^n$, the interior of $\Delta^n$.
+\end{definition}
+
+A \emph{$\Delta$-complex} structure on a space $X$ is a collection of maps $\sigma_\alpha \colon \Delta^n \to X$, 
+with $n$ depending on $\alpha$, such that: 
+\begin{enumerate}[label = (\roman*)]
+  \item The restriction $\sigma_\alpha | \mathring{\Delta^n}$ is injective, and each 
+  point of $X$ is in the image of exactly one such restriction $\sigma_\alpha | \mathring{\Delta^n}$.
+
+  \item Each restriction of $\sigma_\alpha$ to a face fo $\Delta^n$ is one of the maps 
+  $$\sigma_\beta \colon \Delta^{n-1} \to X$$
+  We are identifying the face of $\Delta^n$ with $\Delta^{n-1}$ by the canonical homeomorphism between 
+  them that preserves the ordering of the vertices. 
+
+  \item A set $A \subset X$ is open iff $\sigma_\alpha^{-1} (A)$ is open in $\Delta^n$ 
+  for each $\sigma_\alpha$.
+\end{enumerate}
+
+THerefore we can build $X$ as a quotient space of a collection of disjoint simplices 
+$\Delta^n_\alpha$, one for each $\sigma_\alpha \colon \Delta^n \to X$. One can think of 
+building the quotient space inductively, starting with a discrete set of vertices, then 
+attaching edges to these to produce a graph, then attaching $2$-simplices to the graph, and 
+so no. Therefore a $\Delta$-complex can be described as collections of $n$-simplices $\Delta_\alpha^n$
+for each $n$ together with attaching maps to associate faces of $n$ simplices with $n-1$ simplices. 
+
+More generally, $\Delta$-complexes can be built from collections of disjoint simplices by identifying 
+various subsimplices spanned by subsets of the vertices. 
+The earlier $\Delta$-complex structures on a torus, projective plane, or Klein-bottle can be obtained 
+in this way: by indetfying pairs of edges of two $2$-simplices. 
+Note that sometimes we might be forced to subdivide our space into smaller $n$-simplices to be able to 
+construct is as a $\Delta$-complex. 
+
+\paragraph{Hausdorffness} Since a $\Delta$-complex $X$ is a quotient space of disjoint simplices, $X$ 
+must be Hausdorff. Therefore by condition (iii) each restriction $\sigma_\alpha | \mathring{\Delta^n}$ 
+is a homeomorphism onto its image, which is thus an open simplex in $X$. Therefore 
+these open simplices $\simga_\alpha (\mathring{\Delta^n})$ are the cells $e_\alpha^n$ of a CW 
+complex structure on $X$.
+
+
 \section{References} 
 \begin{quote}
 \textbf{Tammo Dieck's} Book \emph{Algebraic Topology} 
