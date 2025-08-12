@@ -909,6 +909,11 @@ We can generalize by constructing a space by the following procedure:
   In the latter case, $X$ is given the weak topology: $A \subset X$ is open iff $A \cap X^n$ is open (in $X^n$) for each $n$.
 \end{itemize}
 
+\begin{example}
+  The sphere $S^n$ has the structure of a cell complex with just two cells $e^0$ and $e^n$, 
+  then $n$ cell being attached by the constant map $S^{n-1} \to e^0$. This is equivalent to regarding $S^n$ as 
+  the quotient space $D^n / \partial D^n$. 
+\end{example}
 \begin{definition}
   A space $X$ constructed by the above procedure is called a \emph{cell complex} or \emph{CW-complex} (Closure finite, Weak).
 \end{definition}
@@ -916,6 +921,13 @@ We can generalize by constructing a space by the following procedure:
 \begin{definition}
   If $X = X^n$ for some $n$, then $X$ is said to be finite-dimensional, and the smallest such $n$ is the \emph{dimension} of $X$, the maximum 
   dimension of cells of $X$.
+\end{definition}
+
+\begin{definition}
+  A \emph{subcomplex} of a cell complex $X$ is a closed subspace $A \subset X$ that is a union of cells of $X$.
+  Since $A$ is closed, $A$ is a cell complex in its own right.
+  
+  We call a \emph{CW pair} a pair $(X,A)$ consisting of a cell complex $X$ and a subcomplex $A$. 
 \end{definition}
 
 \subsection{Real projective spaces} 
