@@ -1005,9 +1005,9 @@ called \emph{singluar homology groups}, turn out to be much smaller (for reasonn
 the singular homology groups are the same as the homology groups. This approach allows us to solve the problem 
 of defining the boundary maps for cellular chains. 
 
-\subsection{Simplical and Singular Homology} 
+\subsection{$\Delta$-complexes} 
 
-\paragraph{$\Delta$-Complexes} The torus, the projective plane, and the Klein bottle 
+ The torus, the projective plane, and the Klein bottle 
 can each be obtained from a square by identifying opposite edges. 
 Cutting a square along a diagonal produces two triangles, so each of these surfaces can also be built from two 
 triangles by identifying their edges in pairs. Similarly, we decompose any polygon into triangles, 
@@ -1077,6 +1077,54 @@ must be Hausdorff. Therefore by condition (iii) each restriction $\sigma_\alpha 
 is a homeomorphism onto its image, which is thus an open simplex in $X$. Therefore 
 these open simplices $\simga_\alpha (\mathring{\Delta^n})$ are the cells $e_\alpha^n$ of a CW 
 complex structure on $X$.
+
+\subsection{Simplical Homology} 
+
+The goal is to define simplical homology groups of a $\Delta$-complex $X$. Let 
+$\Delta_n (X)$ be the free abelian group with basis the open $n$-simplices $e^n_\alpha$ of $X$. 
+ELements of $\Delta_n (X)$, called $n$-chains, can be written as finite sums 
+$$\sum_\alpha n_\alpha e^n_\alpha \quad n_\alpha \in \mathbb{N}$$
+Equivalently, we could write $\sum_\alpha n_\alpha \sigma_\alpha$ where $\sigma_\alpha \colon \Delta^n \to X$ 
+is the charactestic map of $e^n_\alpha$, with image the closure of $e^n_\alpha$. Such 
+a sum can be thought of as a finite collection of $n$-simplices in $X$ with integer multiplicites, the coefficients 
+$n_\alpha$. 
+
+The boundary of the $n$-simplex $[v_0, \cdots, v_n]$ consists of the various  $(n-1)$-dimensional 
+simplices $[v_0, \cdots, \hat{v_i}, \cdots, v_n]$ where the hat over $v_i$ indicates that this 
+vertex is omitted. 
+We might wish to say that the boundary of $[v_0, \cdots, \hat{v_i}, \cdots, v_n]$ is the $(n-1)$-chain 
+$\sum_i [v_0, \cdots, \hat{v_i}, \cdots, v_n]$, the signs are inserted to take orientations into account. 
+
+\begin{definition}
+  With this geometry in mind, we define $\Delta$-complex $X$ a \emph{boundary homomorphism} 
+  $$\partial_n \colon \: \Delta_n (X) \to \Delta_{n-1} (X)$$
+  by specifying its values on basis elements 
+  $$\partial_n (\sigma_\alpha) = \sum_i (-1)^i \sigma_\alpha | [v_0, \cdots, \hat{v_i}, \cdots, v_n]$$  
+\end{definition}
+
+\begin{lemma}
+  The composition 
+  $$\Delta_n (X) \xrightarrow{\partial_n} \Delta_{n-1}(X) \xrightarrow{\partial_{n-1}} \Delta_{n-2} (X)$$
+  is zero, i.e. $\partial_{n-1} \circ \partial_n \colon \Delta_n \to \Delta_{n-2} = 0$ for all $n$.
+\end{lemma}
+
+The algebraic situation we have now is a sequence of homomorphisms of abelian groups 
+$$\cdots \rightarrow C_{n+1} \xrightarrow{\partial_{n+1}} C_n \xrightarrow{\partial_n} C_{n-1} \rightarrow \cdots 
+\rightarrow C_1 \xrightarrow{\partial_1} C_0 \xrightarrow{\partial_0} 0$$
+with $\partial_n \partial_{n+1} = 0$ for all $n$. We call such a sequence a 
+\emph{chain complex} (note that we have extended it by $0$ at the end with $\partial_0 = 0$). 
+The equation $\partial_n \partial_{n+1} = 0$ can be rewritten as the inclusion 
+$$\operatorname{Im} \partial_{n+1} \subset \ker \partial_n$$
+
+\begin{definition}
+  We define the \emph{$n^\operatorname{th}$ homology group} of the chain complex 
+  to be the quotient group $H_n = \ker \partial_n / \operatorname{Im} \partial_{n+1}$,
+\end{definition}
+
+Elements of $\ker \partial_n$ are called \emph{$n$-cycles}, and elements of $\operatorname{Im} \partial_{n+1}$ are called 
+\emph{$n$-boundaries}. Elements of $H_n$ are cosets of $\operatorname{Im} \partial_{n+1}$, 
+called \emph{homology classes}. Two cycles representing the same homology class are said to be 
+homologous, this means their difference is a boundary. 
 
 
 \section{References} 
