@@ -1126,6 +1126,35 @@ Elements of $\ker \partial_n$ are called \emph{$n$-cycles}, and elements of $\op
 called \emph{homology classes}. Two cycles representing the same homology class are said to be 
 homologous, this means their difference is a boundary. 
 
+\begin{definition}
+  Returning to the case that $C_n = \Delta_n (X)$, the homology group $\ker \partial_n / \operatorname{Im} \partial_{n+1}$ will 
+  be denoted $H_n^\Delta (X)$ and called the \emph{$n^\operatorname{th}$ simplical group} of $X$. 
+\end{definition}
+
+Some obvious questions arise: Are the homology groups independent of the 
+choice of $\Delta$-complex structure on $X$? What about if they're homotopy equivalent? 
+To answer these questions, it is better to leave the rigid simplical realm and 
+introduce singular homology groups. 
+These have the added advantage that they can be defined for all spaces (not just $\Delta$-complexes). 
+However, for $\Delta$-complexes, the singular homology groups are isomorphic to the simplical homology groups.
+
+Traditionally, simplical homology groups are defined for \emph{simplical complexes} which are
+$\Delta$-complexes whose simplices are uniquely determined by their vertices. 
+This ammounts to saying that each $n$-simplex has $n+1$ distcing vertices, and that 
+no other $n$-simplex has this same set of vertices. Thus a simplical complex can be described 
+as a set $X_0$ of vertices together with sets $X_n$ of $n$-simplices, 
+which are $(n+1)$-element subsets of $X_0$. 
+The only restriction is that each $(k+1)$-element subset of the vertices in $X_n$ are 
+are the vertices of a $k$-simplex in $X_k$. From this combinatorial data, we 
+can construct a $\Delta$-complex $X$ can be constructed by taking a partial ordering of the vertices 
+$X_0$ that restricts to a linear ordering of each simplex in $X_n$.
+
+It can be shown that every $\Delta$-complex can be subdivided to be a simplical complex. 
+In particular, every $\Delta$-complex is homeomorphic to a simplical complex. 
+
+Compared with simplical complexes, $\Delta$-complexes have the advantage of simpler computations since 
+we need less simplices. 
+
 
 \section{References} 
 \begin{quote}
