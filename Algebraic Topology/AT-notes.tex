@@ -61,6 +61,7 @@
 \usepackage{graphicx}
 \usepackage{tikz}
 \usetikzlibrary{calc, matrix, decorations.pathreplacing, positioning}
+\usepackage{tikz-cd}
 \usepackage{hyperref}
 \hypersetup{colorlinks,
 linkcolor=blue, citecolor=purple, urlcolor=teal}
@@ -1474,7 +1475,98 @@ $X = \operatorname{int} A \cup \operatorname{int} B$.
 \subsection{Mayer-Vietory sequence}
 In addition to the long exact sequence of homology groups for a pair $(X, A)$, there is another sort of long exact sequence, know as a 
 \emph{Mayer-Vietoris sequence}, which is equally powerful but sometimes more convenient to use. 
-For a pair of subspaces $A, 
+For a pair of subspaces $A,B \subset X$ such that $X$ is the union of all the interior of $A$ and $B$, this exact sequence has the form  
+$$\cdots \to H_n(A \cap B) \xrightarrow{\Phi} H_n (A) \oplus H_n (B) \xrightarrow{\Psi} H_n(X) \xrightarrow{\partial} H_{n-1} (A \cap B) \to \cdots \to H_0(X) \to 0$$ 
+In addition to its usefulness in calculations, the Mayer-Vietoris sequences is also applied frequently in induction arguements, 
+where one might know a certain statement is true for $A, B$ and $A \cap B$ by induction, and then deduce that it is true for $A \cup B$ 
+by the exact sequence. 
+
+It is easy to derive the Mayer-Vietoris sequence from the work we did above. Let $C_n(A + B)$ be the subgroup 
+of $C_n(X)$ consisting of chains that are sum of chains in $A$ and chains in $B$. 
+The usual boundary map $\partial \colon C_n(X) \to C_{n-1} (X)$ takes $C_n (A + B)$ to 
+$C_{n-1} (A + B)$, so the $C_n(A+B)$'s form a chain complex. 
+As shown above, the inclusions $C_n(A + B) \hookrightarrow C_n(X)$ induce isomorphisms on homology groups. 
+The Mayer-Vieteris sequence is then the long exact sequence of homology groups associated to the short exact sequence of chain complexes formed 
+by the short exact sequences 
+$$0 \to C_n (A \cap B) \xrightarrow{\Phi} C_n(A) \oplus C_n(B) \xrightarrow{\Psi} C_n (A + B) \to 0$$
+where $\Phi (x) = (x, -x)$ and $\Psi (x, y) = x + y$. Notice that this chain is exact since: 
+\begin{itemize}
+  \item $\ker \Phi = 0$ 
+  \item $\Psi \Phi = 0$, therefore $\operatorname{Im} \Phi \subset \ker \Psi$. 
+  Moreover, $(a, b) \in \ker \Psi$ iff $a + b = 0 \implies a = -b$, hence 
+  $(a, b) = (a, -a) \in \operatorname{Im} \Psi$. 
+  \item $\operatorname{Im} \Psi = C_n (A + B)$, since every chain in $C_n (A + B)$ can be written as a sum of chains in $A$ and $B$. 
+\end{itemize}
+
+The boundary map $\partial \colon H_n(X) \to H_{n-1} ( A \cap B)$ can easily be made explicit. 
+A class $\alpha \in H_n(X)$ is represented by a cycle $z$ and we can chose $z$ to be a 
+sum $x + y$ of chains in $A$ and $B$ respectively. Notice that since $\partial (x + y) = 0$, we have
+$\partial x = - \partial y$, and the element $\partial \alpha \in H_{n-1} (A \cap B)$ is represented by the cycle $\partial x = - \partial y$, 
+as is clear from the definition of the boundary map in the long exact sequence of homology froups associated to a short exact sequence of chain complexes. 
+
+There is also a formally identical Mayer-Vietoris sequences for reduced homology groups, obtained by 
+augmenting the previous short exact sequence in the obvious way: 
+
+\[
+\begin{tikzcd}
+0 \arrow[r] &
+C_{0}(A\cap B) \arrow[r, "\varphi"] \arrow[d, "\varepsilon"'] &
+C_{0}(A)\oplus C_{0}(B) \arrow[r, "\psi"] \arrow[d, "\varepsilon \oplus \varepsilon"'] &
+C_{0}(A+B) \arrow[r] \arrow[d, "\varepsilon"'] &
+0 \\
+0 \arrow[r] &
+\mathbb{Z} \arrow[r, "\varphi"] &
+\mathbb{Z}\oplus \mathbb{Z} \arrow[r, "\psi"] &
+\mathbb{Z} \arrow[r] &
+0
+\end{tikzcd}
+\]
+
+Moreover, we can construct an exact sequence that is similar to the Mayer-Vietoris sequence, 
+and in some cases generalizes it. If we are given two famps $f, g \colon X \to Y$, then 
+we can form a quotient space 
+$$Z \equiv \left((X \times I )\sqcup Y\right) \big/ \left( (x, 0) \sim f(x), (x, 1) \sim g(x)\right)$$
+Then the exact sequence has the form 
+$$(*) \quad \cdots \to H_n(X) \xrightarrow{f_* - g_*} H_n(Y) \xrightarrow{i_*} H_n(Z) \to H_{n-1} (X) \xrightarrow{f_* - g_*} H_{n-1} (Y) \to \cdots$$
+Where $i$ is the inclusion $Y \hookrightarrow Z$. To derive this, consider the map 
+
+\paragraph{Relative form} 
+A relative form of the Mayer-Vietoris sequence is also useful. If $(X, Y) = (A \cup B, C \cup D)$ with $C \subset A$ and $D \subset B$, 
+such that $X$ is the union of the interiors of $A$ and $B$, and $Y$ of $C$ and $D$, then we have a relative Mayer-Vietoris sequence 
+$$\cdots \to H_n(A \cap B, C \cap D) \xrightarrow{\Phi} H_n (A, C) \oplus H_n (B, D) \xrightarrow{\Psi} H_(X, Y) \xrightarrow{\partial} \cdots $$
+To derive this, consider the commutative diagram 
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+& 0 \arrow[d] & 0 \arrow[d] & 0 \arrow[d] & \\
+0 \arrow[r] &
+C_n(C\cap D) \arrow[r, "{\Phi}"] \arrow[d] &
+C_n(C)\oplus C_n(D) \arrow[r, "{\Psi}"] \arrow[d] &
+C_n(C+D) \arrow[r] \arrow[d] &
+0 \\
+0 \arrow[r] &
+C_n(A\cap B) \arrow[r, "{\Phi}"] \arrow[d] &
+C_n(A)\oplus C_n(B) \arrow[r, "{\Psi}"] \arrow[d] &
+C_n(A+B) \arrow[r] \arrow[d] &
+0 \\
+0 \arrow[r] &
+C_n(A\cap B,\,C\cap D) \arrow[r, "{\Phi}"] \arrow[d] &
+C_n(A,C)\oplus C_n(B,D) \arrow[r, "{\Psi}"] \arrow[d] &
+C_n(A+B,\,C+D) \arrow[r] \arrow[d] &
+0 \\
+& 0 & 0 & 0 &
+\end{tikzcd}
+\]
+Where $C_n(A + B, C + D)$ is the quotient of $C_n (A + B) \subset C_n (X)$ by its subgroup 
+$C_n (C + D) \subset C_n (Y)$ Thus the columns of the diagram are exact. We have seen that the 
+first two rows are exact, and we claim that the third row is exact with the maps $\Phi, \Psi$ induced 
+from the $\Psi$ and $\Phi$ in the second row. Since in the second row $\Psi \Phi = 0$, this also holds in the third 
+row, so it is a chain complex. Viewing the three rows as chain complexes, the diagram represents a short exact sequence of 
+chain complexes. The associated long exact sequence of homology groups has two out of every three terms zero 
+since the first two rows are exact, hence the remaining groups are zero and the third row is exact. 
+
+The third column maps to $0 \to C_n (Y) \to C_n(X) \to C_n(X, Y) \to 0$, inducing maps on homology that are isomorphisms for the $X$ and $Y$ terms. 
+Therefore the maps $C_n(A+B, C+D) \to C_n (X,Y)$ also induce isomorphisms on homology. Therefore the relative MV sequence is just the long 
+exact sequence of homology groups associated to the short exact sequence of chain complexes.  
 
 \section{References} 
 \begin{quote}
