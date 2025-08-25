@@ -508,11 +508,11 @@ bound on the existence of quantum codes (As of today, there are no known codes w
 \subsection{Carlderbank-Shor-Steane codes}
 CSS codes are an important subclass of the more general class of \emph{stabilizer} codes. 
 \begin{definition}
-Let $C_1$ and $C_2$ be $[n, k_1]$ and $[n, k_2]$ classical linear codes over $\mathbb{F}_2why $ such that $C_2 \subset C_1$ and $C_1$ and $C_2^\perp$ both correct 
+Let $C_1$ and $C_2$ be $[n, k_1]$ and $[n, k_2]$ classical linear codes over $\mathbb{F}_2$ such that $C_2 \subset C_1$ and $C_1$ and $C_2^\perp$ both correct 
 $t$ errors. We define the \emph{CSS code of $C_1$ over $C_2$ $\operatorname{CSS}(C_1, C_2)$} to be an $[n, k_1 - k_2]$ quantum code capable of correcting errors on $t$ qubits via the following construction: \\
 Let $x \in C_1$ be an arbitrary codeword in $C_1$, we define the quantum state $\ket{x + C_2}$ to be 
 $$\ket{x + C_2} := \frac{1}{\sqrt{|C_2|}} \sum_{y \in C_2} \ket{x + y}$$
-Let $x' \in C_1$ such that $x - x' \in C_2$, then clearly $\ket{x + C_2} = \ket{x' + C_2}$, therefore the state $\ket{x + C_2}$ depends only upon the coser $C_1 / C_2$ which $x$ is in. 
+Let $x' \in C_1$ such that $x - x' \in C_2$, then clearly $\ket{x + C_2} = \ket{x' + C_2}$, therefore the state $\ket{x + C_2}$ depends only upon the coset $C_1 / C_2$ which $x$ is in. 
 Moreover, if $x$ and $x'$ belong to different cosets of $C_2$, then for no $y, y' \in C_2$ does $x + y = x' + y'$, and therefore $\ket{x + C_2}$ and $\ket{x' + C_2}$ are orthonormal states. 
 
 The quantum code $\operatorname{CSS}(C_1, C_2)$ is defined to be vector space spanned by the states $\ket{x + C_2}$ for all $x \in C_1$. 
@@ -1104,7 +1104,7 @@ $[n,k_1]$ and $[n,k_2]$ classical codes such that $C_2 \subset C_1$ and $C_1$ an
 correct $t$ errors. Define a check matrix of the form 
 $$\begin{pmatrix}
   H(C_2^\perp) & 0 \\
-  0 & H(C_2)
+  0 & H(C_1)
 \end{pmatrix}$$
 To see that this defines a stabilizer code, we need to check the matrix to satisfy the commutativity 
 condition $H(C_2^\perp) H(C_1)^T = 0$. But we have that 
@@ -1375,21 +1375,37 @@ and $Z^p$ (which denotes a $Z$ operator applied to the qubits on the edges of pl
 The number of physical qubits is the number of edges, which is $2L^2$. The number of logical qubits is $2L^2$ minus 
 the number of independent parity checks in $C_x^\perp$ and $C_z^\perp$. Therefore the number of logical qubits is 
 $$2 L^2 - (L^2 - 1) - (L^2 - 1) = 2$$
-Moreover, we can easily deduce that $d \leq 4$. 
 
-The lements of $C_x$ are the set of all closed loops in the Torus, and $C_z^\perp$ is the set 
-of all loops that are boundaries of plaquettes. The set $C_x / C_z^\perp$ is then the set of all 
-loops that go around the torus. In the quantum setting, these correspond to the Pauli strings that commute with 
-all the $X^v$ operators, but are not products of $Z^p$ operators. These are the non-contractible loops 
-consisting of $Z$ operations. 
+It remains to determine the distance $d^+ = \min \{d_x^+, d_z^+\}$. Since the two codes are isomorphic, 
+we only need to determine $d_x^+ = \min_{c \in C_x \setminus C_z^\perp} |c|$ (This is because the elements of $C_z^\perp$ are the pure-$Z$ stabilizers 
+of the code). 
 
-Since the smallest non-contractible loop has to go all the way around the torus, $d_x^+ = L$, which 
-is much better than teh distance of $4$ achieved by the two classical codes on their own. This indicates that 
-the code is highky degenerate. All the contractible loops are errors in the classical codes, but correspond to no error 
-in the quantum code. 
+The elements of $C_x$ are the set of all $Z$-closed loops in the torus, and $C_z^\perp$ is the set of all closed loops that are 
+boundary of plaquettes. Therefore the set $C_x \setminus C_z^\perp$ is the set of all $Z$-loops that go around the torus (non-contractible $Z$-loops). 
+In stabilizer language, they are precisely the $Z$-type logical operators, or the Pauli-strings of $Z$ operations applied to the qubits on the edges of 
+these non-contractible loops. (These loops are called contractible because they can be transformed into the identity operation by multiplying by $Z^p$). 
 
-so the parameters for the toric code are: 
-$$[2L^2, 2, L]$$
+Note that although we can shift loops by multiplying by $Z^p$ operators, but we can't transform the two fundamental loops of the torus into one another. 
+If we multiply the red operation by the $Z^p$'s the result is effectively the same error. 
+
+Since the smallest non-contractible loop has to go all around the Torus, $d_x^+ = L$. Note that this is much better than the 
+result of $4$ achieved by the classical codes, this shows that the code is highly degenerate. Indeed, all of the small (contractible) 
+loops are errors in classical codes, but they are equivalent to no error in the quantum code. 
+
+Also note that the same argument can be made by replacing $d_x^+$ with $d_z^+$ and $Z$-strings with $X$-strings. Therefore 
+we have $4$ logical operations (as expected on $2$ qubits), which correspond to $X$ and $Z$ loops around the two holes of the Torus (with $Z_1$ and $X_2$ being around the same hole, 
+and vice versa). The anticommutativity comes from the fact that $X_1$ and $Z_1$ intersect on a single qubit, the difference between $Z_1$ and 
+$Z_2$ comes from the fact that the two loops are topologically equivalent. 
+
+To frame the parameters of the toric code in terms of the number of physical qubit, let $n = 2L^2$. The toric code is a 
+$[[2L^2, 2, L]]$ code, which means that it is a $[[n, 2, \sqrt{n/2}]]$ code. 
+
+One nice property of the two classical codes $C_x$, $C_z$ is that every partiy check only involves $4$ bits and every bit is only involved in 
+$4$ parity checks. Thus, $C_x$ and $C_z$ are LDPC codes. More generally, a code $C$ is LDPC if it has a basis of checks 
+$h_1, \cdots, h_l$ such that each qubit occurs in $O(1)$ of the $h_j$'s and $|h_j| = O(1)$. Note that this property also holds 
+for the toric code constructed from the two classical LDPC codes (For more detail view the classical Error correction file). 
+
+LDPC codes are useful since the checks can be implemented in parallel, however, it is more challenging to construct LDPC codes with good parameters. 
 
 \section{References}
 The material is adapted from: 
